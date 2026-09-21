@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SolveNet | Solver Profile</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f7f7fb;
+
+            color: #22223b;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+
+            height: 72px;
+
+            background: white;
+
+            border-bottom:
+                1px solid #e8e8ef;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 7%;
+        }
+
+        .logo {
+
+            color: #22223b;
+
+            text-decoration: none;
+
+            font-size: 24px;
+
+            font-weight: 800;
+        }
+
+        .back {
+
+            color: #77778b;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+        .back:hover {
+
+            color: #22223b;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .page {
+
+            max-width: 900px;
+
+            margin: 55px auto;
+
+            padding: 0 25px 70px;
+        }
+
+
+        .intro {
+
+            margin-bottom: 35px;
+        }
+
+        .tag {
+
+            display: inline-block;
+
+            background: #eeeefa;
+
+            color: #5b5b8a;
+
+            padding:
+                7px 13px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.5px;
+
+            margin-bottom: 15px;
+        }
+
+        h1 {
+
+            margin:
+                0 0 12px;
+
+            font-size: 40px;
+
+            letter-spacing: -1px;
+        }
+
+        .intro p {
+
+            margin: 0;
+
+            color: #77778b;
+
+            font-size: 16px;
+
+            line-height: 1.7;
+
+            max-width: 700px;
+        }
+
+
+        /* =========================
+           FORM CARD
+        ========================= */
+
+        .card {
+
+            background: white;
+
+            border:
+                1px solid #e6e6ee;
+
+            border-radius: 20px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 15px 40px
+                rgba(
+                    34,
+                    34,
+                    59,
+                    0.06
+                );
+        }
+
+
+        .section {
+
+            margin-bottom: 32px;
+        }
+
+        .section:last-child {
+
+            margin-bottom: 0;
+        }
+
+        .section-title {
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+            margin:
+                0 0 7px;
+        }
+
+        .section-description {
+
+            color: #88889a;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+            margin:
+                0 0 18px;
+        }
+
+
+        /* =========================
+           INPUT
+        ========================= */
+
+        .input-label {
+
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        textarea {
+
+            width: 100%;
+
+            border:
+                1px solid #ddddE7;
+
+            border-radius: 10px;
+
+            padding: 13px;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            outline: none;
+
+            background: white;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
+
+            border-color: #8888a5;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(
+                    100,
+                    100,
+                    150,
+                    0.08
+                );
+        }
+
+        textarea {
+
+            min-height: 130px;
+
+            resize: vertical;
+        }
+
+
+        /* =========================
+           OPTIONS
+        ========================= */
+
+        .options {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 10px;
+        }
+
+        .option {
+
+            position: relative;
+        }
+
+        .option input {
+
+            position: absolute;
+
+            opacity: 0;
+
+            pointer-events: none;
+        }
+
+        .option label {
+
+            display: block;
+
+            border:
+                1px solid #e1e1e9;
+
+            border-radius: 10px;
+
+            padding:
+                12px 10px;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            color: #66667a;
+
+            cursor: pointer;
+
+            transition:
+                all 0.2s;
+        }
+
+        .option label:hover {
+
+            border-color: #b9b9ca;
+
+            background: #fafafe;
+        }
+
+        .option input:checked + label {
+
+            background: #22223b;
+
+            color: white;
+
+            border-color: #22223b;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .submit-area {
+
+            margin-top: 35px;
+
+            padding-top: 25px;
+
+            border-top:
+                1px solid #eeeeF4;
+        }
+
+        .submit-button {
+
+            width: 100%;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background: #22223b;
+
+            color: white;
+
+            padding: 15px;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s,
+                transform 0.2s;
+        }
+
+        .submit-button:hover {
+
+            background: #363653;
+
+            transform:
+                translateY(-1px);
+        }
+
+        .submit-button:disabled {
+
+            opacity: 0.6;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+
+        /* =========================
+           LOADING
+        ========================= */
+
+        .loading {
+
+            display: none;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #77778b;
+
+            font-size: 13px;
+        }
+
+        .spinner {
+
+            display: inline-block;
+
+            width: 15px;
+
+            height: 15px;
+
+            border:
+                2px solid #ddd;
+
+            border-top-color: #22223b;
+
+            border-radius: 50%;
+
+            animation:
+                spin 0.8s linear infinite;
+
+            vertical-align: middle;
+
+            margin-right: 7px;
+        }
+
+        @keyframes spin {
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .page {
+
+                margin-top: 35px;
+            }
+
+            h1 {
+
+                font-size: 32px;
+            }
+
+            .card {
+
+                padding: 25px;
+            }
+
+            .options {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .options {
+
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a
+            href="/"
+            class="logo"
+        >
+            SolveNet
+        </a>
+
+        <a
+            href="/"
+            class="back"
+        >
+            ← Back to home
+        </a>
+
+    </nav>
+
+
+    <!-- PAGE -->
+
+    <main class="page">
+
+
+        <!-- INTRO -->
+
+        <div class="intro">
+
+            <span class="tag">
+                SOLUTION CONTRIBUTOR
+            </span>
+
+            <h1>
+                Tell us what you can solve.
+            </h1>
+
+            <p>
+                We'll use your skills, interests and
+                experience to find real-world problem
+                statements that match you.
+            </p>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <div class="card">
+
+            <form
+                id="solverForm"
+            >
+
+
+                <!-- NAME -->
+
+                <div class="section">
+
+                    <h2 class="section-title">
+                        About You
+                    </h2>
+
+                    <p class="section-description">
+                        Tell us a little about yourself
+                        so we can personalize your
+                        problem matches.
+                    </p>
+
+                    <label
+                        class="input-label"
+                        for="name"
+                    >
+                        Your Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- SKILLS -->
+
+                <div class="section">
+
+                    <h2 class="section-title">
+                        Your Skills
+                    </h2>
+
+                    <p class="section-description">
+                        Select the technical skills you
+                        can contribute.
+                    </p>
+
+                    <div class="options">
+
+
+                        <div class="option">
+
+                            <input
+                                type="checkbox"
+                                id="python"
+                                name="skills"
+                                value="Python"
+                            >
+
+                            <label for="python">
+                                Python
+                            </label>
+
+                        </div>
+
+
+                        <div class="option">
+
+                            <input
+                                type="checkbox"
+                                id="java"
+                                name="skills"
+                                value="Java"
+                            >
+
+                            <label for="java">
+                                Java
+                            </label>
+
+                        </div>
+
+
+                        <div class="option">
+
+                            <input
+                                type="checkbox"
+                                id="ml"
+                                name="skills"
+                                value="Machine Learning"
+                            >
+
+                            <label for="ml">
+                                Machine Learning
+                            </label>
+
+                        </div>
+
+
+                        <div class="option">
+
+                            <input
+                                type="checkbox"
+                                id="ai"
+                                name="skills"
+                                value="AI"
+                            >
+
+                            <label for="ai">
+                                AI
+                            </label>
+
+                        </div>
+
+
+                        <div class="option">
+
+                            <input
+                                type="checkbox"
+                                id="iot"
+                                name="skills"
+                                value="IoT"
+                            >
+
+                            <label for="iot">
+                                IoT
+                            </label>
+
+                        </div>
+
+
+                        <div class="option">
+
+                            <input
+                                type="checkbox"
+                                id="web"
+                                name="skills"
+                                value="Web Development"
+                            >
+
+                            <label for="web">
+                                Web Development
+                            </label>
+
+                        </div>
+
+
+                        <div class="option">
+
+                            <input
+                                type="checkbox"
+                                id="mobile"
+                                name="skills"
+                                value="Mobile Development"
+                            >
+
+                            <label for="mobile">
+                                Mobile Development
+                            </label>
+
+                        </div>
+
+
+                        <div class="option">
+
+                            <input
+                                type="checkbox"
+                                id="data"
+                                name="skills"
+                                value="Data Science"
+                            >
+
+                            <label for="data">
+                                Data Science
+                            </label>
+
+                        </div>
+
+
+                        <div class="option">
+
+                            <input
+                                type="checkbox"
+                                id="cv"
+                                name="skills"
+                                value="Computer Vision"
+                            >
+
+                            <label for="cv">
+                                Computer Vision
+                            </label>
+
+                        </div>
+
+
+                        <div class="option">
+
+                            <input
+                                type="checkbox"
+                                id="uiux"
+                                name="skills"
+                                value="UI/UX"
+                            >
+
+                            <label for="uiux">
+                                UI / UX
+                            </label>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- INTERESTS -->
+
+                <div class="section">
+
+                    <h2 class="section-title">
+                        Your Interests
+                    </h2>
+
+                    <p class="section-description">
+                        Choose the areas where you'd
+                        like to make an impact.
+                    </p>
+
+                    <div class="options">
+
+
+                        <div class="option">
+
+                            <input
+                                type="checkbox"
+                                id="smartcity"
+                                name="interests"
+                                value="Smart Cities"
+                            >
+
+                            <label for="smartcity">
+                                Smart Cities
+                            </label>
+
+                        </div>
+
+
+                        <div class="option">
+
+                            <input
+                                type="checkbox"
+                                id="healthcare"
+                                name="interests"
+                                value="Healthcare"
+                            >
+
+                            <label for="healthcare">
+                                Healthcare
+                            </label>
+
+                        </div>
+
+
+                        <div class="option">
+
+                            <input
+                                type="checkbox"
+                                id="education"
+                                name="interests"
+                                value="Education"
+                            >
+
+                            <label for="education">
+                                Education
+                            </label>
+
+                        </div>
+
+
+                        <div class="option">
+
+                            <input
+                                type="checkbox"
+                                id="environment"
+                                name="interests"
+                                value="Environment"
+                            >
+
+                            <label for="environment">
+                                Environment
+                            </label>
+
+                        </div>
+
+
+                        <div class="option">
+
+                            <input
+                                type="checkbox"
+                                id="publicservices"
+                                name="interests"
+                                value="Public Services"
+                            >
+
+                            <label for="publicservices">
+                                Public Services
+                            </label>
+
+                        </div>
+
+
+                        <div class="option">
+
+                            <input
+                                type="checkbox"
+                                id="transportation"
+                                name="interests"
+                                value="Transportation"
+                            >
+
+                            <label for="transportation">
+                                Transportation
+                            </label>
+
+                        </div>
+
+
+                        <div class="option">
+
+                            <input
+                                type="checkbox"
+                                id="agriculture"
+                                name="interests"
+                                value="Agriculture"
+                            >
+
+                            <label for="agriculture">
+                                Agriculture
+                            </label>
+
+                        </div>
+
+
+                        <div class="option">
+
+                            <input
+                                type="checkbox"
+                                id="rural"
+                                name="interests"
+                                value="Rural Development"
+                            >
+
+                            <label for="rural">
+                                Rural Development
+                            </label>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- EXPERIENCE -->
+
+                <div class="section">
+
+                    <h2 class="section-title">
+                        Projects & Experience
+                    </h2>
+
+                    <p class="section-description">
+                        Describe your previous projects,
+                        experience or anything else that
+                        could help us understand what you
+                        can contribute.
+                    </p>
+
+                    <textarea
+                        id="experience"
+                        name="experience"
+                        placeholder="Example: I built a Python-based image classification project and have worked with machine learning and computer vision."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <div class="submit-area">
+
+                    <button
+                        type="submit"
+                        class="submit-button"
+                        id="submitButton"
+                    >
+                        Find Problems →
+                    </button>
+
+                    <div
+                        class="loading"
+                        id="loading"
+                    >
+
+                        <span class="spinner"></span>
+
+                        Finding problems that match
+                        your profile...
+
+                    </div>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        const form =
+            document.getElementById(
+                "solverForm"
+            );
+
+        const submitButton =
+            document.getElementById(
+                "submitButton"
+            );
+
+        const loading =
+            document.getElementById(
+                "loading"
+            );
+
+
+        form.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                const name =
+                    document.getElementById(
+                        "name"
+                    ).value.trim();
+
+
+                const experience =
+                    document.getElementById(
+                        "experience"
+                    ).value.trim();
+
+
+                const skills = Array.from(
+                    document.querySelectorAll(
+                        'input[name="skills"]:checked'
+                    )
+                ).map(
+                    checkbox =>
+                        checkbox.value
+                );
+
+
+                const interests = Array.from(
+                    document.querySelectorAll(
+                        'input[name="interests"]:checked'
+                    )
+                ).map(
+                    checkbox =>
+                        checkbox.value
+                );
+
+
+                if (skills.length === 0) {
+
+                    alert(
+                        "Please select at least one skill."
+                    );
+
+                    return;
+                }
+
+
+                if (interests.length === 0) {
+
+                    alert(
+                        "Please select at least one interest."
+                    );
+
+                    return;
+                }
+
+
+                const solverProfile = {
+
+                    name: name,
+
+                    skills: skills,
+
+                    interests: interests,
+
+                    experience: experience
+                };
+
+
+                submitButton.disabled =
+                    true;
+
+                loading.style.display =
+                    "block";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "/find-problems",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify(
+                                        solverProfile
+                                    )
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (
+                        data.success
+                    ) {
+
+                        /*
+                         * This will take us to
+                         * the matched-problems
+                         * page once the backend
+                         * is implemented.
+                         */
+
+                        window.location.href =
+                            "/matched-problems";
+
+                    } else {
+
+                        alert(
+                            data.message ||
+                            "Unable to find matching problems."
+                        );
+
+                        submitButton.disabled =
+                            false;
+
+                        loading.style.display =
+                            "none";
+                    }
+
+                } catch (error) {
+
+                    console.error(
+                        error
+                    );
+
+                    alert(
+                        "Something went wrong. Please try again."
+                    );
+
+                    submitButton.disabled =
+                        false;
+
+                    loading.style.display =
+                        "none";
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

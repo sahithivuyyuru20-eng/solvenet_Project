@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SolveNet | Solution Proposals</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f6fb;
+            color: #22223b;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        header {
+            background: white;
+            border-bottom: 1px solid #e5e3ef;
+            padding: 28px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .stage {
+            margin-top: 6px;
+            font-size: 13px;
+            color: #77778b;
+            letter-spacing: 1px;
+        }
+
+        main {
+            padding: 50px 0 80px;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin: 0 0 12px;
+        }
+
+        .subtitle {
+            color: #77778b;
+            font-size: 17px;
+            line-height: 1.7;
+            max-width: 850px;
+            margin-bottom: 35px;
+        }
+
+        .problem-box {
+            background: white;
+            border: 1px solid #e5e3ef;
+            border-radius: 17px;
+            padding: 25px;
+            margin-bottom: 35px;
+        }
+
+        .problem-box h2 {
+            margin-top: 0;
+            font-size: 20px;
+        }
+
+        .problem-box p {
+            color: #55556a;
+            line-height: 1.7;
+        }
+
+        .proposal-card {
+            background: white;
+            border: 1px solid #e5e3ef;
+            border-radius: 17px;
+            padding: 28px;
+            margin-bottom: 22px;
+        }
+
+        .person-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: #22223b;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .person-name {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .person-type {
+            margin: 5px 0 0;
+            color: #77778b;
+            font-size: 13px;
+        }
+
+        .proposal-label {
+            font-size: 12px;
+            color: #77778b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .proposal {
+            background: #f7f6fb;
+            border-radius: 12px;
+            padding: 20px;
+            color: #44445a;
+            line-height: 1.7;
+        }
+
+        .proposal strong {
+            color: #22223b;
+        }
+
+        .evaluate-section {
+            background: #22223b;
+            color: white;
+            border-radius: 20px;
+            padding: 35px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .evaluate-section h2 {
+            margin-top: 0;
+            font-size: 28px;
+        }
+
+        .evaluate-section p {
+            color: #dedde8;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto 25px;
+        }
+
+        .evaluate-button {
+            background: white;
+            color: #22223b;
+            border: none;
+            border-radius: 10px;
+            padding: 14px 25px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .evaluate-button:hover {
+            opacity: 0.9;
+        }
+
+        .empty {
+            background: white;
+            border: 1px solid #e5e3ef;
+            border-radius: 17px;
+            padding: 50px;
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="container">
+
+        <div class="logo">
+            SolveNet
+        </div>
+
+        <div class="stage">
+            STAGE 03 · SOLUTION PROPOSALS
+        </div>
+
+    </div>
+
+</header>
+
+
+<main>
+
+    <div class="container">
+
+
+        <h1>
+            Multiple solution ideas have been generated.
+        </h1>
+
+
+        <p class="subtitle">
+
+            Each relevant contributor has been given a
+            possible solution direction based on their
+            skills and previous work.
+
+            SolveNet will now evaluate these ideas and
+            synthesize the strongest compatible approach.
+
+        </p>
+
+
+        <!-- PROBLEM -->
+
+        <div class="problem-box">
+
+            <h2>
+                Problem Being Solved
+            </h2>
+
+            <p>
+                {{ problem.get("problem", "") }}
+            </p>
+
+        </div>
+
+
+        {% if matches %}
+
+
+            {% for person in matches %}
+
+                <div class="proposal-card">
+
+
+                    <div class="person-header">
+
+                        <div class="avatar">
+
+                            {{ person.get("name", "P")[0] }}
+
+                        </div>
+
+
+                        <div>
+
+                            <h2 class="person-name">
+
+                                {{ person.get(
+                                    "name",
+                                    "Contributor"
+                                ) }}
+
+                            </h2>
+
+
+                            <p class="person-type">
+
+                                {{ person.get(
+                                    "type",
+                                    "Contributor"
+                                ) }}
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="proposal-label">
+
+                        Proposed Solution
+
+                    </div>
+
+
+                    <div class="proposal">
+
+                        {{ proposal_map.get(
+                            person.get("id"),
+                            "A practical solution based on this contributor's relevant expertise."
+                        ) }}
+
+                    </div>
+
+
+                </div>
+
+            {% endfor %}
+
+
+            <!-- EVALUATION -->
+
+            <div class="evaluate-section">
+
+
+                <h2>
+                    Ready for AI Evaluation?
+                </h2>
+
+
+                <p>
+
+                    SolveNet will now compare all of these
+                    solution proposals based on feasibility,
+                    expected impact, innovation, scalability,
+                    resource requirements and problem
+                    alignment.
+
+                </p>
+
+
+                <button
+                    class="evaluate-button"
+                    onclick="goToEvaluation()"
+                >
+
+                    🤖 Evaluate All Solutions →
+
+                </button>
+
+
+            </div>
+
+
+        {% else %}
+
+
+            <div class="empty">
+
+                <h2>
+                    No matched contributors found.
+                </h2>
+
+                <p>
+                    Please return to Stage 2 and generate
+                    AI matches first.
+                </p>
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+</main>
+
+
+<script>
+
+    function goToEvaluation() {
+
+        window.location.href =
+            "/evaluation";
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

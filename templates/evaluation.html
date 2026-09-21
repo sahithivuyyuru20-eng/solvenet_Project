@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>SolveNet | AI Solution Evaluation</title>
+
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f7f6fb;
+    color: #22223b;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+header {
+    background: white;
+    border-bottom: 1px solid #e5e3ef;
+    padding: 28px 0;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.stage {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #77778b;
+    letter-spacing: 1px;
+}
+
+main {
+    padding: 50px 0 80px;
+}
+
+h1 {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    color: #77778b;
+    font-size: 17px;
+    line-height: 1.7;
+    max-width: 850px;
+    margin-bottom: 35px;
+}
+
+.problem-box,
+.card {
+    background: white;
+    border: 1px solid #e5e3ef;
+    border-radius: 17px;
+    padding: 30px;
+    margin-bottom: 25px;
+}
+
+.problem-box p,
+.reason,
+.proposal-summary {
+    color: #55556a;
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   SELECTED SOLUTION
+========================================= */
+
+.selected-card {
+
+    border: 4px solid #22223b;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #f1efff
+        );
+
+    box-shadow:
+        0 15px 40px
+        rgba(34, 34, 59, 0.15);
+}
+
+.selected-badge {
+
+    display: inline-block;
+
+    background: #22223b;
+
+    color: white;
+
+    padding: 10px 18px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    letter-spacing: 0.5px;
+
+    margin-bottom: 20px;
+}
+
+.selected-person {
+
+    font-size: 38px;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+.selected-id {
+
+    color: #77778b;
+
+    font-size: 14px;
+
+    margin-bottom: 25px;
+}
+
+.selected-score {
+
+    display: inline-block;
+
+    background: #eeeafd;
+
+    padding: 10px 16px;
+
+    border-radius: 10px;
+
+    font-weight: bold;
+
+    margin-bottom: 25px;
+}
+
+.proposal-box {
+
+    background: white;
+
+    border: 1px solid #e5e3ef;
+
+    border-radius: 14px;
+
+    padding: 22px;
+
+    line-height: 1.7;
+
+    color: #55556a;
+
+    margin-bottom: 20px;
+}
+
+.proposal-box strong {
+    color: #22223b;
+}
+
+
+/* =========================================
+   CRITERIA
+========================================= */
+
+.criteria {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+
+    margin-top: 25px;
+}
+
+.criterion {
+
+    background: #faf9fd;
+
+    border: 1px solid #e9e7f0;
+
+    border-radius: 12px;
+
+    padding: 18px;
+}
+
+.criterion strong {
+
+    display: block;
+
+    margin-bottom: 8px;
+}
+
+.criterion span {
+
+    color: #66667a;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   COMPARISON
+========================================= */
+
+.comparison-title {
+
+    font-size: 28px;
+
+    margin:
+        50px 0 20px;
+}
+
+.proposal-summary {
+
+    background: #f7f6fb;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    margin-bottom: 25px;
+}
+
+.strengths h3 {
+    color: #286b45;
+}
+
+.limitations h3 {
+    color: #a05252;
+}
+
+ul {
+    line-height: 1.8;
+    color: #55556a;
+}
+
+
+/* =========================================
+   NEXT STEP
+========================================= */
+
+.next-step {
+
+    background: #22223b;
+
+    color: white;
+
+    border-radius: 20px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    margin-top: 45px;
+}
+
+.next-step p {
+
+    color: #dedde8;
+
+    line-height: 1.7;
+
+    max-width: 700px;
+
+    margin:
+        0 auto 25px;
+}
+
+button {
+
+    background: white;
+
+    color: #22223b;
+
+    border: none;
+
+    border-radius: 10px;
+
+    padding:
+        14px 25px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.error {
+
+    background: #fff0f0;
+
+    color: #9a3d3d;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    margin-top: 15px;
+}
+
+
+@media (max-width: 700px) {
+
+    .criteria {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    .selected-person {
+        font-size: 28px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="container">
+
+<div class="logo">
+SolveNet
+</div>
+
+<div class="stage">
+STAGE 04 · AI SOLUTION EVALUATION
+</div>
+
+</div>
+
+</header>
+
+
+<main>
+
+<div class="container">
+
+
+<h1>
+AI evaluates the proposed solutions.
+</h1>
+
+
+<p class="subtitle">
+
+SolveNet evaluates every submitted solution using
+technical feasibility, expected impact, innovation,
+scalability, resource requirements and problem alignment.
+
+The AI evaluates the <strong>ideas</strong> and then
+selects <strong>exactly one submitted solution</strong>.
+
+</p>
+
+
+<div class="problem-box">
+
+<h2>
+Problem Being Solved
+</h2>
+
+<p>
+{{ problem.get("problem", "") }}
+</p>
+
+</div>
+
+
+
+{% if not evaluation %}
+
+
+<div class="card">
+
+<h2>
+Evaluate All Submitted Solutions
+</h2>
+
+<p>
+The AI will evaluate every proposal and then select
+exactly ONE proposal to continue to Stage 5.
+</p>
+
+<button
+id="evaluateButton"
+onclick="evaluateSolutions()"
+>
+🤖 Evaluate & Select One Solution
+</button>
+
+<div id="status"></div>
+
+<div
+id="error"
+class="error"
+style="display:none;"
+></div>
+
+</div>
+
+
+{% endif %}
+
+
+
+{% if evaluation %}
+
+
+{% set selected =
+evaluation.get("selected_solution", {})
+%}
+
+
+<!-- ======================================
+     FINAL SELECTED SOLUTION
+======================================= -->
+
+
+<div class="card selected-card">
+
+
+<div class="selected-badge">
+
+✓ SELECTED SOLUTION
+
+</div>
+
+
+<h3>
+Selected Contributor
+</h3>
+
+
+<div class="selected-person">
+
+{{ selected.get(
+"person_name",
+"ERROR: No contributor selected"
+) }}
+
+</div>
+
+
+<div class="selected-id">
+
+Contributor ID:
+
+<strong>
+
+{{ selected.get(
+"person_id",
+"ERROR"
+) }}
+
+</strong>
+
+</div>
+
+
+<div class="selected-score">
+
+AI Overall Score:
+
+{{ selected.get(
+"overall_score",
+"N/A"
+) }}
+
+ / 100
+
+</div>
+
+
+<div class="proposal-box">
+
+<strong>
+Selected Solution Proposal
+</strong>
+
+<br><br>
+
+{{ selected.get(
+"proposal",
+"ERROR: No proposal selected"
+) }}
+
+</div>
+
+
+<div class="reason">
+
+<strong>
+Why was this solution selected?
+</strong>
+
+<br><br>
+
+{{ selected.get(
+"selection_reason",
+"No selection reason was returned."
+) }}
+
+</div>
+
+
+<div class="criteria">
+
+
+<div class="criterion">
+
+<strong>
+Technical Feasibility
+</strong>
+
+<span>
+{{ selected.get(
+"technical_feasibility",
+""
+) }}
+</span>
+
+</div>
+
+
+<div class="criterion">
+
+<strong>
+Expected Impact
+</strong>
+
+<span>
+{{ selected.get(
+"expected_impact",
+""
+) }}
+</span>
+
+</div>
+
+
+<div class="criterion">
+
+<strong>
+Innovation
+</strong>
+
+<span>
+{{ selected.get(
+"innovation",
+""
+) }}
+</span>
+
+</div>
+
+
+<div class="criterion">
+
+<strong>
+Scalability
+</strong>
+
+<span>
+{{ selected.get(
+"scalability",
+""
+) }}
+</span>
+
+</div>
+
+
+<div class="criterion">
+
+<strong>
+Resource Requirements
+</strong>
+
+<span>
+{{ selected.get(
+"resource_requirements",
+""
+) }}
+</span>
+
+</div>
+
+
+<div class="criterion">
+
+<strong>
+Problem Alignment
+</strong>
+
+<span>
+{{ selected.get(
+"problem_alignment",
+""
+) }}
+</span>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ======================================
+     ALL EVALUATIONS
+======================================= -->
+
+
+<h2 class="comparison-title">
+
+Evaluation of All Proposals
+
+</h2>
+
+
+{% for item in evaluation.get(
+"proposal_evaluations",
+[]
+) %}
+
+
+<div class="card">
+
+
+<h2>
+
+{{ item.get(
+"person_name",
+"Contributor"
+) }}
+
+</h2>
+
+
+<div class="proposal-summary">
+
+<strong>
+Proposal Summary
+</strong>
+
+<br><br>
+
+{{ item.get(
+"proposal_summary",
+""
+) }}
+
+</div>
+
+
+<div class="selected-score">
+
+Overall Score:
+
+{{ item.get(
+"overall_score",
+"N/A"
+) }}
+
+ / 100
+
+</div>
+
+
+<div class="criteria">
+
+
+<div class="criterion">
+
+<strong>
+Technical Feasibility
+</strong>
+
+<span>
+{{ item.get(
+"technical_feasibility",
+""
+) }}
+</span>
+
+</div>
+
+
+<div class="criterion">
+
+<strong>
+Expected Impact
+</strong>
+
+<span>
+{{ item.get(
+"expected_impact",
+""
+) }}
+</span>
+
+</div>
+
+
+<div class="criterion">
+
+<strong>
+Innovation
+</strong>
+
+<span>
+{{ item.get(
+"innovation",
+""
+) }}
+</span>
+
+</div>
+
+
+<div class="criterion">
+
+<strong>
+Scalability
+</strong>
+
+<span>
+{{ item.get(
+"scalability",
+""
+) }}
+</span>
+
+</div>
+
+
+<div class="criterion">
+
+<strong>
+Resource Requirements
+</strong>
+
+<span>
+{{ item.get(
+"resource_requirements",
+""
+) }}
+</span>
+
+</div>
+
+
+<div class="criterion">
+
+<strong>
+Problem Alignment
+</strong>
+
+<span>
+{{ item.get(
+"problem_alignment",
+""
+) }}
+</span>
+
+</div>
+
+
+</div>
+
+
+<div class="strengths">
+
+<h3>
+✓ Strengths
+</h3>
+
+<ul>
+
+{% for strength in item.get(
+"strengths",
+[]
+) %}
+
+<li>
+{{ strength }}
+</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+
+<div class="limitations">
+
+<h3>
+⚠ Limitations
+</h3>
+
+<ul>
+
+{% for limitation in item.get(
+"limitations",
+[]
+) %}
+
+<li>
+{{ limitation }}
+</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+
+<div class="reason">
+
+<strong>
+AI Reasoning
+</strong>
+
+<br><br>
+
+{{ item.get(
+"overall_reasoning",
+""
+) }}
+
+</div>
+
+
+</div>
+
+
+{% endfor %}
+
+
+
+<!-- ======================================
+     STAGE 5
+======================================= -->
+
+
+<div class="next-step">
+
+
+<h2>
+
+✓ One Solution Has Been Selected
+
+</h2>
+
+
+<p>
+
+<strong>
+{{ selected.get(
+"person_name",
+"Selected Contributor"
+) }}
+</strong>
+
+submitted the solution selected by the AI.
+
+This <strong>single solution</strong> will now move
+to Stage 5, where SolveNet will generate its
+implementation Starter Kit.
+
+</p>
+
+
+<button
+onclick="goToStarterKit()"
+>
+
+🚀 Generate Starter Kit →
+
+</button>
+
+
+</div>
+
+
+{% endif %}
+
+
+</div>
+
+</main>
+
+
+
+<script>
+
+
+async function evaluateSolutions() {
+
+const button =
+document.getElementById(
+"evaluateButton"
+);
+
+const status =
+document.getElementById(
+"status"
+);
+
+const error =
+document.getElementById(
+"error"
+);
+
+
+button.disabled = true;
+
+button.innerText =
+"🤖 Evaluating all proposals...";
+
+status.innerText =
+"AI is evaluating all proposals and selecting exactly one...";
+
+
+try {
+
+const response =
+await fetch(
+"/evaluate-proposals",
+{
+method: "POST",
+headers: {
+"Content-Type":
+"application/json"
+}
+}
+);
+
+
+const data =
+await response.json();
+
+
+if (!data.success) {
+
+throw new Error(
+data.message ||
+"Evaluation failed."
+);
+
+}
+
+
+window.location.reload();
+
+}
+
+catch (err) {
+
+console.error(err);
+
+error.innerText =
+err.message;
+
+error.style.display =
+"block";
+
+button.disabled =
+false;
+
+button.innerText =
+"🤖 Evaluate & Select One Solution";
+
+status.innerText =
+"";
+
+}
+
+}
+
+
+
+function goToStarterKit() {
+
+window.location.href =
+"/starter-kit";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

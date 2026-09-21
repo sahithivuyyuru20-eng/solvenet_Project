@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SolveNet | AI Problem Refiner</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f5ff;
+            color: #17172b;
+            min-height: 100vh;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 1000px;
+            margin: auto;
+            padding: 45px 25px 70px;
+        }
+
+        .top {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .label {
+            color: #6846e8;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            max-width: 700px;
+            margin: auto;
+            color: #66667a;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* Progress */
+
+        .progress-area {
+            background: white;
+            border-radius: 18px;
+            padding: 20px 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 30px rgba(40, 35, 90, 0.08);
+        }
+
+        .progress-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e8e5f5;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 16%;
+            height: 100%;
+            background: #6846e8;
+            transition: width 0.4s ease;
+        }
+
+        /* Cards */
+
+        .card {
+            background: white;
+            border-radius: 22px;
+            padding: 35px;
+            box-shadow: 0 10px 35px rgba(40, 35, 90, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .card-description {
+            color: #77778b;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            border: 2px solid #e5e3ef;
+            border-radius: 15px;
+            padding: 18px;
+            font-size: 16px;
+            font-family: inherit;
+            resize: vertical;
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: #6846e8;
+        }
+
+        button {
+            border: none;
+            border-radius: 12px;
+            padding: 14px 24px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .primary {
+            background: #6846e8;
+            color: white;
+            margin-top: 18px;
+        }
+
+        .primary:hover {
+            transform: translateY(-2px);
+            background: #5635d0;
+        }
+
+        .secondary {
+            background: #eeeafd;
+            color: #6846e8;
+        }
+
+        /* Chat */
+
+        #chatSection {
+            display: none;
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .ai-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #6846e8;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .question-box {
+            background: #f5f2ff;
+            border-left: 4px solid #6846e8;
+            border-radius: 12px;
+            padding: 20px;
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 22px;
+        }
+
+        .answer-label {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .small-note {
+            color: #888;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        /* Brief */
+
+        #briefSection {
+            display: none;
+        }
+
+        .complete {
+            display: inline-block;
+            background: #e8f8ee;
+            color: #18864b;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .brief-title {
+            font-size: 30px;
+            margin-bottom: 25px;
+        }
+
+        .brief-block {
+            margin-bottom: 25px;
+        }
+
+        .brief-block h3 {
+            font-size: 15px;
+            color: #6846e8;
+            margin-bottom: 8px;
+        }
+
+        .brief-block p {
+            color: #555568;
+            line-height: 1.6;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .box {
+            background: #f8f7fc;
+            padding: 18px;
+            border-radius: 14px;
+        }
+
+        .box h3 {
+            color: #6846e8;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            padding-left: 20px;
+            color: #555568;
+            line-height: 1.8;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: #eeeafd;
+            color: #6846e8;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .warning {
+            background: #fff8e6;
+            border-left: 4px solid #e7a900;
+            padding: 18px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .loading {
+            display: none;
+            margin-top: 15px;
+            color: #6846e8;
+            font-weight: bold;
+        }
+
+        @media (max-width: 700px) {
+            .page {
+                padding: 25px 15px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- HEADER -->
+
+    <div class="top">
+
+        <div class="label">
+            STAGE 01 · AI PROBLEM REFINER
+        </div>
+
+        <h1>
+            Turn a vague problem into a clear challenge.
+        </h1>
+
+        <p class="subtitle">
+            SolveNet will interview you with intelligent follow-up
+            questions and transform your problem into a structured
+            project brief.
+        </p>
+
+    </div>
+
+
+    <!-- PROGRESS -->
+
+    <div class="progress-area" id="progressArea">
+
+        <div class="progress-top">
+
+            <span>AI Interview Progress</span>
+
+            <span id="progressText">
+                0 / 6
+            </span>
+
+        </div>
+
+        <div class="progress-bar">
+
+            <div
+                class="progress-fill"
+                id="progressFill">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- START CARD -->
+
+    <div class="card" id="startSection">
+
+        <h2>
+            What problem are you trying to solve?
+        </h2>
+
+        <p class="card-description">
+            Don't worry about explaining it perfectly.
+            Describe the problem naturally in your own words.
+        </p>
+
+        <textarea
+            id="problemInput"
+            placeholder="Example: There are a lot of potholes in our area and we don't know what to do..."
+        ></textarea>
+
+        <button
+            class="primary"
+            id="startButton"
+            onclick="startInterview()">
+
+            ✨ Start AI Interview →
+
+        </button>
+
+        <div
+            class="loading"
+            id="startLoading">
+
+            AI is thinking...
+
+        </div>
+
+    </div>
+
+
+    <!-- CHAT SECTION -->
+
+    <div class="card" id="chatSection">
+
+        <div class="chat-header">
+
+            <div class="ai-icon">
+                ✦
+            </div>
+
+            <div>
+
+                <strong>
+                    SolveNet AI
+                </strong>
+
+                <div style="color:#888;font-size:13px;">
+                    Problem Refinement Agent
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="question-box"
+            id="questionBox">
+
+        </div>
+
+
+        <div class="answer-label">
+            Your answer
+        </div>
+
+        <textarea
+            id="answerInput"
+            placeholder="Type your answer here..."
+        ></textarea>
+
+        <button
+            class="primary"
+            onclick="sendAnswer()">
+
+            Continue →
+
+        </button>
+
+        <button
+            class="secondary"
+            onclick="skipAnswer()"
+            style="margin-left:8px;">
+
+            I'm not sure
+
+        </button>
+
+        <div
+            class="loading"
+            id="answerLoading">
+
+            AI is analyzing your answer...
+
+        </div>
+
+        <div class="small-note">
+            The AI will only ask for information that is still needed.
+        </div>
+
+    </div>
+
+
+    <!-- FINAL BRIEF -->
+
+    <div class="card" id="briefSection">
+
+        <div class="complete">
+            ✓ PROBLEM BRIEF READY
+        </div>
+
+        <h2
+            class="brief-title"
+            id="briefTitle">
+        </h2>
+
+
+        <div class="brief-block">
+
+            <h3>
+                PROBLEM
+            </h3>
+
+            <p id="briefProblem"></p>
+
+        </div>
+
+
+        <div class="grid">
+
+            <div class="box">
+
+                <h3>
+                    PEOPLE AFFECTED
+                </h3>
+
+                <ul id="affectedUsers"></ul>
+
+            </div>
+
+
+            <div class="box">
+
+                <h3>
+                    CURRENT APPROACH
+                </h3>
+
+                <p id="currentApproach"></p>
+
+            </div>
+
+
+            <div class="box">
+
+                <h3>
+                    AVAILABLE DATA / RESOURCES
+                </h3>
+
+                <ul id="availableData"></ul>
+
+            </div>
+
+
+            <div class="box">
+
+                <h3>
+                    CONSTRAINTS
+                </h3>
+
+                <ul id="constraints"></ul>
+
+            </div>
+
+        </div>
+
+
+        <div class="brief-block" style="margin-top:25px;">
+
+            <h3>
+                DESIRED OUTCOME
+            </h3>
+
+            <p id="desiredOutcome"></p>
+
+        </div>
+
+
+        <div class="brief-block">
+
+            <h3>
+                SUCCESS METRICS
+            </h3>
+
+            <ul id="successMetrics"></ul>
+
+        </div>
+
+
+        <div class="brief-block">
+
+            <h3>
+                POTENTIAL DOMAINS
+            </h3>
+
+            <div
+                class="tags"
+                id="domains">
+            </div>
+
+        </div>
+
+
+        <div
+            class="warning"
+            id="assumptionsBox">
+
+            <strong>
+                AI Assumptions
+            </strong>
+
+            <ul id="assumptions"></ul>
+
+        </div>
+
+
+        <div
+            class="warning"
+            id="missingBox"
+            style="margin-top:15px;">
+
+            <strong>
+                Information Still Needed
+            </strong>
+
+            <ul id="missingInformation"></ul>
+
+        </div>
+
+
+        <div class="actions">
+
+            <button
+                class="secondary"
+                onclick="location.reload()">
+
+                ← Refine Again
+
+            </button>
+
+            <button
+                class="primary"
+                onclick="goToMatches()">
+
+                Confirm & Find Matches →
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let questionCount = 0;
+
+
+// ============================================================
+// START INTERVIEW
+// ============================================================
+
+async function startInterview() {
+
+    const problem =
+        document.getElementById("problemInput").value.trim();
+
+    if (!problem) {
+
+        alert("Please describe your problem first.");
+
+        return;
+    }
+
+
+    document.getElementById("startLoading").style.display =
+        "block";
+
+    document.getElementById("startButton").disabled =
+        true;
+
+
+    try {
+
+        const response = await fetch(
+            "/start-interview",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    problem: problem
+                })
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        console.log("AI response:", data);
+
+
+        if (!data.success) {
+
+            alert(
+                data.message ||
+                "Something went wrong."
+            );
+
+            return;
+        }
+
+
+        document.getElementById("startSection").style.display =
+            "none";
+
+        document.getElementById("chatSection").style.display =
+            "block";
+
+
+        handleAIResult(data.result);
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Something went wrong while connecting to SolveNet."
+        );
+
+    }
+
+    finally {
+
+        document.getElementById("startLoading").style.display =
+            "none";
+
+        document.getElementById("startButton").disabled =
+            false;
+    }
+}
+
+
+// ============================================================
+// HANDLE AI RESPONSE
+// ============================================================
+
+function handleAIResult(result) {
+
+    console.log("AI result:", result);
+
+
+    if (!result) {
+
+        alert("The AI returned an empty response.");
+
+        return;
+    }
+
+
+    if (result.status === "question") {
+
+        questionCount++;
+
+        document.getElementById("progressText").innerText =
+            questionCount + " / 6";
+
+
+        const percentage =
+            Math.min(
+                (questionCount / 6) * 100,
+                100
+            );
+
+
+        document.getElementById("progressFill").style.width =
+            percentage + "%";
+
+
+        document.getElementById("questionBox").innerText =
+            result.question;
+
+
+        document.getElementById("answerInput").value = "";
+
+        document.getElementById("answerInput").focus();
+
+
+        document.getElementById("chatSection").style.display =
+            "block";
+
+
+        return;
+    }
+
+
+    if (result.status === "complete") {
+
+        showBrief(result.brief);
+
+        return;
+    }
+
+
+    alert(
+        "The AI returned an unexpected response."
+    );
+}
+
+
+// ============================================================
+// SEND ANSWER
+// ============================================================
+
+async function sendAnswer() {
+
+    const answer =
+        document.getElementById("answerInput").value.trim();
+
+
+    if (!answer) {
+
+        alert(
+            "Please enter an answer or click I'm not sure."
+        );
+
+        return;
+    }
+
+
+    await submitAnswer(answer);
+}
+
+
+// ============================================================
+// SKIP ANSWER
+// ============================================================
+
+async function skipAnswer() {
+
+    await submitAnswer(
+        "I'm not sure."
+    );
+}
+
+
+// ============================================================
+// SUBMIT ANSWER
+// ============================================================
+
+async function submitAnswer(answer) {
+
+    document.getElementById("answerLoading").style.display =
+        "block";
+
+
+    try {
+
+        const response = await fetch(
+            "/interview-message",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    answer: answer
+                })
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        console.log("AI response:", data);
+
+
+        if (!data.success) {
+
+            alert(
+                data.message ||
+                "Something went wrong."
+            );
+
+            return;
+        }
+
+
+        handleAIResult(data.result);
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Could not connect to the AI."
+        );
+
+    }
+
+    finally {
+
+        document.getElementById("answerLoading").style.display =
+            "none";
+    }
+}
+
+
+// ============================================================
+// SHOW FINAL BRIEF
+// ============================================================
+
+function showBrief(brief) {
+
+    if (!brief) {
+
+        alert(
+            "The AI completed the interview but no brief was returned."
+        );
+
+        return;
+    }
+
+
+    document.getElementById("chatSection").style.display =
+        "none";
+
+    document.getElementById("progressArea").style.display =
+        "none";
+
+    document.getElementById("briefSection").style.display =
+        "block";
+
+
+    document.getElementById("briefTitle").innerText =
+        brief.title || "Structured Problem";
+
+
+    document.getElementById("briefProblem").innerText =
+        brief.problem || "Not provided.";
+
+
+    fillList(
+        "affectedUsers",
+        brief.affected_users
+    );
+
+
+    document.getElementById("currentApproach").innerText =
+        brief.current_approach || "Not specified.";
+
+
+    fillList(
+        "availableData",
+        brief.available_data
+    );
+
+
+    fillList(
+        "constraints",
+        brief.constraints
+    );
+
+
+    document.getElementById("desiredOutcome").innerText =
+        brief.desired_outcome || "Not specified.";
+
+
+    fillList(
+        "successMetrics",
+        brief.success_metrics
+    );
+
+
+    fillTags(
+        "domains",
+        brief.domain
+    );
+
+
+    fillList(
+        "assumptions",
+        brief.assumptions
+    );
+
+
+    fillList(
+        "missingInformation",
+        brief.missing_information
+    );
+}
+
+
+// ============================================================
+// FILL LIST
+// ============================================================
+
+function fillList(elementId, items) {
+
+    const element =
+        document.getElementById(elementId);
+
+
+    element.innerHTML = "";
+
+
+    if (!items || items.length === 0) {
+
+        const li =
+            document.createElement("li");
+
+        li.innerText =
+            "No information provided.";
+
+        element.appendChild(li);
+
+        return;
+    }
+
+
+    items.forEach(function(item) {
+
+        const li =
+            document.createElement("li");
+
+        li.innerText =
+            item;
+
+        element.appendChild(li);
+
+    });
+}
+
+
+// ============================================================
+// FILL TAGS
+// ============================================================
+
+function fillTags(elementId, items) {
+
+    const element =
+        document.getElementById(elementId);
+
+
+    element.innerHTML = "";
+
+
+    if (!items || items.length === 0) {
+
+        const span =
+            document.createElement("span");
+
+        span.className = "tag";
+
+        span.innerText =
+            "General";
+
+        element.appendChild(span);
+
+        return;
+    }
+
+
+    items.forEach(function(item) {
+
+        const span =
+            document.createElement("span");
+
+        span.className = "tag";
+
+        span.innerText =
+            item;
+
+        element.appendChild(span);
+
+    });
+}
+
+
+// ============================================================
+// GO TO MATCHES
+// ============================================================
+
+function goToMatches() {
+
+    window.location.href =
+        "/matches";
+}
+
+</script>
+
+</body>
+</html>

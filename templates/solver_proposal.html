@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Propose a Solution | SolveNet</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        .navbar {
+            height: 70px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        .logo span {
+            color: #4f46e5;
+        }
+
+        .back {
+            text-decoration: none;
+            color: #4f46e5;
+            font-weight: 600;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1050px;
+            margin: 45px auto;
+        }
+
+        .intro {
+            margin-bottom: 30px;
+        }
+
+        .label {
+            color: #4f46e5;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #667085;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        .solver-card {
+            background: #111827;
+            color: white;
+            border-radius: 18px;
+            padding: 24px 28px;
+            margin-bottom: 25px;
+        }
+
+        .solver-card small {
+            color: #aab3c5;
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        .solver-name {
+            font-size: 23px;
+            font-weight: 700;
+        }
+
+        .problem-card {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 25px;
+        }
+
+        .problem-title {
+            font-size: 27px;
+            font-weight: 750;
+            margin-bottom: 15px;
+        }
+
+        .problem-description {
+            color: #596579;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            background: #eef2ff;
+            color: #4338ca;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .proposal-card {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .proposal-card h2 {
+            margin-bottom: 8px;
+        }
+
+        .proposal-card p {
+            color: #667085;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 230px;
+            resize: vertical;
+            border: 1px solid #d0d5dd;
+            border-radius: 12px;
+            padding: 16px;
+            font-family: inherit;
+            font-size: 15px;
+            outline: none;
+            line-height: 1.6;
+        }
+
+        textarea:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px #eef2ff;
+        }
+
+        .hint {
+            background: #f8fafc;
+            border-left: 4px solid #4f46e5;
+            padding: 15px;
+            margin: 18px 0;
+            color: #475467;
+            line-height: 1.5;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            border: none;
+            background: #4f46e5;
+            color: white;
+            padding: 15px;
+            border-radius: 11px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #4338ca;
+        }
+
+        button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .status {
+            margin-top: 18px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        @media (max-width: 700px) {
+            h1 {
+                font-size: 30px;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .problem-card,
+            .proposal-card {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">Solve<span>Net</span></div>
+
+    <a href="/matched-problems" class="back">
+        ← Back to matched problems
+    </a>
+</nav>
+
+
+<div class="container">
+
+    <div class="intro">
+        <div class="label">SOLUTION PROPOSAL</div>
+
+        <h1>How would you solve this problem?</h1>
+
+        <p class="subtitle">
+            Submit one practical solution idea. SolveNet's AI will
+            evaluate the proposal against the problem requirements.
+        </p>
+    </div>
+
+
+    <!-- SOLVER -->
+
+    <div class="solver-card">
+
+        <small>YOUR PROFILE</small>
+
+        <div class="solver-name">
+            {{ solver_profile.name }}
+        </div>
+
+    </div>
+
+
+    <!-- SELECTED PROBLEM -->
+
+    <div class="problem-card">
+
+        <div class="label">SELECTED PROBLEM</div>
+
+        <div class="problem-title">
+            {{ problem.title }}
+        </div>
+
+        <div class="problem-description">
+            {{ problem.problem }}
+        </div>
+
+        {% if problem.domain %}
+
+        <div class="tags">
+
+            {% for domain in problem.domain %}
+
+            <span class="tag">
+                {{ domain }}
+            </span>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- PROPOSAL -->
+
+    <div class="proposal-card">
+
+        <h2>Your Solution Proposal</h2>
+
+        <p>
+            Explain what you would build, how it would work,
+            and how it would address the problem.
+        </p>
+
+        <div class="hint">
+            <strong>Tip:</strong>
+            Include the main idea, how it works, technologies or
+            resources needed, and the expected impact.
+        </div>
+
+        <textarea
+            id="proposal"
+            placeholder="Example: I would build an AI-based system that..."
+        ></textarea>
+
+        <button id="submitBtn" onclick="submitProposal()">
+            Submit Solution Proposal →
+        </button>
+
+        <div id="status" class="status"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+async function submitProposal() {
+
+    const proposal = document
+        .getElementById("proposal")
+        .value
+        .trim();
+
+    const button = document.getElementById("submitBtn");
+    const status = document.getElementById("status");
+
+    if (!proposal) {
+
+        status.style.color = "#dc2626";
+        status.textContent =
+            "Please describe your solution before submitting.";
+
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Submitting...";
+
+    status.style.color = "#667085";
+    status.textContent = "Submitting your proposal...";
+
+    try {
+
+        const response = await fetch("/submit-solver-proposal", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                proposal: proposal
+            })
+
+        });
+
+        const data = await response.json();
+
+        if (!data.success) {
+
+            throw new Error(
+                data.message || "Unable to submit proposal."
+            );
+
+        }
+
+        status.style.color = "#16a34a";
+
+        status.textContent =
+            "Proposal submitted successfully. Evaluating your solution...";
+
+        setTimeout(() => {
+
+            window.location.href = "/solver-evaluation";
+
+        }, 800);
+
+    }
+
+    catch (error) {
+
+        status.style.color = "#dc2626";
+
+        status.textContent = error.message;
+
+        button.disabled = false;
+
+        button.textContent =
+            "Submit Solution Proposal →";
+    }
+
+}
+
+</script>
+
+</body>
+</html>

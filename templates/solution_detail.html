@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        SolveNet | {{ solution.title }}
+    </title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f7f6fb;
+
+            color: #22223b;
+        }
+
+
+        .container {
+
+            width: 90%;
+
+            max-width: 1100px;
+
+            margin: auto;
+        }
+
+
+        header {
+
+            background: white;
+
+            border-bottom:
+                1px solid #e5e3ef;
+
+            padding: 30px 0;
+        }
+
+
+        .logo {
+
+            font-size: 24px;
+
+            font-weight: bold;
+        }
+
+
+        .stage {
+
+            font-size: 13px;
+
+            color: #77778b;
+
+            margin-top: 6px;
+
+            letter-spacing: 1px;
+        }
+
+
+        main {
+
+            padding: 50px 0 80px;
+        }
+
+
+        .back {
+
+            margin-bottom: 30px;
+
+            cursor: pointer;
+
+            color: #55556a;
+
+            font-size: 14px;
+        }
+
+
+        h1 {
+
+            font-size: 40px;
+
+            line-height: 1.2;
+
+            margin-bottom: 15px;
+        }
+
+
+        .date {
+
+            color: #77778b;
+
+            font-size: 14px;
+
+            margin-bottom: 35px;
+        }
+
+
+        .section {
+
+            background: white;
+
+            border:
+                1px solid #e5e3ef;
+
+            border-radius: 16px;
+
+            padding: 28px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .section h2 {
+
+            margin-top: 0;
+
+            font-size: 22px;
+
+            margin-bottom: 16px;
+        }
+
+
+        .text {
+
+            color: #55556a;
+
+            line-height: 1.75;
+        }
+
+
+        .tags {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+        }
+
+
+        .tag {
+
+            background: #f0eff7;
+
+            padding: 8px 12px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+        }
+
+
+        .item {
+
+            padding: 15px;
+
+            background: #f8f7fb;
+
+            border-radius: 10px;
+
+            margin-bottom: 10px;
+
+            color: #55556a;
+
+            line-height: 1.6;
+        }
+
+
+        .item strong {
+
+            display: block;
+
+            color: #22223b;
+
+            margin-bottom: 6px;
+        }
+
+
+        pre {
+
+            background: #181825;
+
+            color: #f5f5f5;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            overflow-x: auto;
+
+            line-height: 1.5;
+
+            font-size: 13px;
+        }
+
+
+        ol,
+        ul {
+
+            color: #55556a;
+
+            line-height: 1.8;
+        }
+
+
+        .contributors {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(220px, 1fr)
+                );
+
+            gap: 12px;
+        }
+
+
+        .person {
+
+            background: #f8f7fb;
+
+            border-radius: 12px;
+
+            padding: 16px;
+        }
+
+
+        .person strong {
+
+            display: block;
+
+            margin-bottom: 5px;
+        }
+
+
+        .person span {
+
+            color: #77778b;
+
+            font-size: 13px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="container">
+
+        <div class="logo">
+            SolveNet
+        </div>
+
+        <div class="stage">
+            SOLUTION MARKETPLACE · SAVED SOLUTION
+        </div>
+
+    </div>
+
+</header>
+
+
+<main>
+
+<div class="container">
+
+
+    <div
+        class="back"
+        onclick="window.location.href='/marketplace'"
+    >
+
+        ← Back to Solution Marketplace
+
+    </div>
+
+
+    <h1>
+        {{ solution.title }}
+    </h1>
+
+
+    <div class="date">
+
+        Saved:
+        {{ solution.created_at }}
+
+    </div>
+
+
+    <!-- PROBLEM -->
+
+    <div class="section">
+
+        <h2>
+            Problem
+        </h2>
+
+        <div class="text">
+
+            {{ solution.problem }}
+
+        </div>
+
+    </div>
+
+
+    <!-- PROBLEM SUMMARY -->
+
+    {% if solution.starter_kit.problem_summary %}
+
+    <div class="section">
+
+        <h2>
+            Problem Summary
+        </h2>
+
+        <div class="text">
+
+            {{ solution.starter_kit.problem_summary }}
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- SOLUTION DIRECTION -->
+
+    {% if solution.starter_kit.solution_direction %}
+
+    <div class="section">
+
+        <h2>
+            Proposed Solution Direction
+        </h2>
+
+        <div class="text">
+
+            {{ solution.starter_kit.solution_direction }}
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- TECHNOLOGY -->
+
+    {% if solution.starter_kit.technology_stack %}
+
+    <div class="section">
+
+        <h2>
+            Technology Stack
+        </h2>
+
+
+        {% for category, values in
+            solution.starter_kit.technology_stack.items()
+        %}
+
+            {% if values %}
+
+            <div class="item">
+
+                <strong>
+                    {{ category|replace("_", " ")|title }}
+                </strong>
+
+
+                <div class="tags">
+
+                    {% for value in values %}
+
+                    <span class="tag">
+                        {{ value }}
+                    </span>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- LITERATURE -->
+
+    {% if solution.starter_kit.literature_review %}
+
+    <div class="section">
+
+        <h2>
+            Literature Review
+        </h2>
+
+
+        {% for item in
+            solution.starter_kit.literature_review
+        %}
+
+        <div class="item">
+
+            <strong>
+                {{ item.topic }}
+            </strong>
+
+            {{ item.why_relevant }}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- CASE STUDIES -->
+
+    {% if solution.starter_kit.case_studies %}
+
+    <div class="section">
+
+        <h2>
+            Similar Case Studies
+        </h2>
+
+
+        {% for item in
+            solution.starter_kit.case_studies
+        %}
+
+        <div class="item">
+
+            <strong>
+                {{ item.title }}
+            </strong>
+
+            {{ item.description }}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ARCHITECTURE -->
+
+    {% if solution.starter_kit.architecture %}
+
+    <div class="section">
+
+        <h2>
+            System Architecture
+        </h2>
+
+
+        {% for item in
+            solution.starter_kit.architecture
+        %}
+
+        <div class="item">
+
+            <strong>
+                {{ item.component }}
+            </strong>
+
+            {{ item.description }}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- ROADMAP -->
+
+    {% if solution.starter_kit.implementation_roadmap %}
+
+    <div class="section">
+
+        <h2>
+            Implementation Roadmap
+        </h2>
+
+
+        <ol>
+
+            {% for step in
+                solution.starter_kit.implementation_roadmap
+            %}
+
+            <li>
+                {{ step }}
+            </li>
+
+            {% endfor %}
+
+        </ol>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- STARTER CODE -->
+
+    {% if solution.starter_kit.starter_code %}
+
+    <div class="section">
+
+        <h2>
+            Starter Code
+        </h2>
+
+
+        <p class="text">
+
+            File:
+            {{
+                solution.starter_kit.starter_code.filename
+            }}
+
+        </p>
+
+
+        <pre><code>{{ solution.starter_kit.starter_code.code }}</code></pre>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- SUCCESS METRICS -->
+
+    {% if solution.starter_kit.success_metrics %}
+
+    <div class="section">
+
+        <h2>
+            Success Metrics
+        </h2>
+
+
+        <ul>
+
+            {% for metric in
+                solution.starter_kit.success_metrics
+            %}
+
+            <li>
+                {{ metric }}
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- RISKS -->
+
+    {% if solution.starter_kit.risks %}
+
+    <div class="section">
+
+        <h2>
+            Risks & Challenges
+        </h2>
+
+
+        <ul>
+
+            {% for risk in
+                solution.starter_kit.risks
+            %}
+
+            <li>
+                {{ risk }}
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- TEAM ROLES -->
+
+    {% if solution.starter_kit.team_roles %}
+
+    <div class="section">
+
+        <h2>
+            Recommended Team Roles
+        </h2>
+
+
+        {% for role in
+            solution.starter_kit.team_roles
+        %}
+
+        <div class="item">
+
+            <strong>
+                {{ role.role }}
+            </strong>
+
+            Suggested match:
+            {{ role.suggested_match }}
+
+            <br><br>
+
+            {{ role.responsibility }}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- CONTRIBUTORS -->
+
+    {% if solution.matches %}
+
+    <div class="section">
+
+        <h2>
+            Matched Contributors
+        </h2>
+
+
+        <div class="contributors">
+
+            {% for person in solution.matches %}
+
+            <div class="person">
+
+                <strong>
+                    {{ person.name }}
+                </strong>
+
+                <span>
+                    {{ person.type }}
+                </span>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+</div>
+
+</main>
+
+
+</body>
+
+</html>

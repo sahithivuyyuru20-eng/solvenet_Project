@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SolveNet | AI Matchmaking</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f6fb;
+            color: #22223b;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        /* HEADER */
+
+        header {
+            background: white;
+            border-bottom: 1px solid #e5e3ef;
+            padding: 28px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .stage {
+            margin-top: 6px;
+            font-size: 13px;
+            color: #77778b;
+            letter-spacing: 1px;
+        }
+
+        /* MAIN */
+
+        main {
+            padding: 50px 0 80px;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin: 0 0 12px;
+        }
+
+        .subtitle {
+            color: #77778b;
+            font-size: 17px;
+            line-height: 1.7;
+            max-width: 850px;
+            margin-bottom: 35px;
+        }
+
+        /* PROBLEM */
+
+        .problem-box {
+            background: white;
+            border: 1px solid #e5e3ef;
+            border-radius: 17px;
+            padding: 25px;
+            margin-bottom: 35px;
+        }
+
+        .problem-box h2 {
+            margin-top: 0;
+            font-size: 20px;
+        }
+
+        .problem-box p {
+            color: #55556a;
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+
+        /* BUTTON */
+
+        .action-area {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .primary-button {
+            background: #22223b;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 14px 25px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .primary-button:hover {
+            opacity: 0.9;
+        }
+
+        .primary-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .status {
+            margin-top: 14px;
+            color: #77778b;
+            font-size: 14px;
+        }
+
+        /* MATCH CARD */
+
+        .match-card {
+            background: white;
+            border: 1px solid #e5e3ef;
+            border-radius: 17px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .person-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: #22223b;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .person-name {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .person-type {
+            margin: 5px 0 0;
+            color: #77778b;
+            font-size: 13px;
+        }
+
+        .score {
+            display: inline-block;
+            margin-top: 10px;
+            background: #f0eef7;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .reason {
+            color: #55556a;
+            line-height: 1.6;
+            margin-bottom: 18px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 9px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+
+        .skill {
+            background: #f0eef7;
+            color: #55556a;
+            padding: 7px 11px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .projects {
+            margin-bottom: 18px;
+            color: #55556a;
+            line-height: 1.6;
+        }
+
+        .contribution {
+            background: #f7f6fb;
+            border-radius: 10px;
+            padding: 15px;
+            color: #55556a;
+            line-height: 1.6;
+        }
+
+        /* NEXT */
+
+        .next-section {
+            background: white;
+            border: 1px solid #e5e3ef;
+            border-radius: 18px;
+            padding: 35px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .next-section h2 {
+            margin-top: 0;
+        }
+
+        .next-section p {
+            color: #77778b;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .next-button {
+            background: #22223b;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 14px 25px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .next-button:hover {
+            opacity: 0.9;
+        }
+
+        /* EMPTY */
+
+        .empty {
+            background: white;
+            border: 1px solid #e5e3ef;
+            border-radius: 17px;
+            padding: 50px;
+            text-align: center;
+        }
+
+        /* HIDDEN */
+
+        #matchesContainer {
+            display: none;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="container">
+
+        <div class="logo">
+            SolveNet
+        </div>
+
+        <div class="stage">
+            STAGE 02 · AI MATCHMAKING ENGINE
+        </div>
+
+    </div>
+
+</header>
+
+
+<main>
+
+    <div class="container">
+
+
+        <h1>
+            Find relevant solution contributors.
+        </h1>
+
+
+        <p class="subtitle">
+
+            SolveNet analyzes the problem and identifies
+            people whose existing skills, projects,
+            courses and research are relevant to it.
+
+        </p>
+
+
+        <!-- PROBLEM -->
+
+        <div class="problem-box">
+
+            <h2>
+                Structured Problem
+            </h2>
+
+            <p>
+                {{ problem.get("problem", "") }}
+            </p>
+
+        </div>
+
+
+        <!-- FIND MATCHES -->
+
+        <div class="action-area">
+
+            <button
+                id="findButton"
+                class="primary-button"
+                onclick="findMatches()"
+            >
+
+                🤖 Find AI Matches
+
+            </button>
+
+
+            <div
+                id="status"
+                class="status"
+            ></div>
+
+        </div>
+
+
+        <!-- MATCHES -->
+
+        <div
+            id="matchesContainer"
+        ></div>
+
+
+        <!-- NEXT STEP -->
+
+        <div
+            id="nextSection"
+            class="next-section"
+            style="display: none;"
+        >
+
+            <h2>
+                Your contributors are ready.
+            </h2>
+
+
+            <p>
+
+                Each matched contributor can now
+                independently propose a solution.
+                SolveNet will evaluate these ideas
+                in the next stage.
+
+            </p>
+
+
+            <button
+                class="next-button"
+                onclick="goToProposals()"
+            >
+
+                💡 Collect Solution Proposals →
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<script>
+
+
+// ======================================================
+// FIND MATCHES
+// ======================================================
+
+async function findMatches() {
+
+
+    const button =
+        document.getElementById(
+            "findButton"
+        );
+
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    const container =
+        document.getElementById(
+            "matchesContainer"
+        );
+
+
+    const nextSection =
+        document.getElementById(
+            "nextSection"
+        );
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "🤖 AI is finding matches...";
+
+
+    status.textContent =
+        "Analyzing skills, projects and research...";
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                "/find-matches",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    }
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            status.textContent =
+                data.message;
+
+            button.disabled = false;
+
+            button.textContent =
+                "🤖 Find AI Matches";
+
+            return;
+
+        }
+
+
+        displayMatches(
+            data.matches
+        );
+
+
+        status.textContent =
+            "✓ AI matchmaking completed.";
+
+
+        button.textContent =
+            "✓ Matches Generated";
+
+
+        nextSection.style.display =
+            "block";
+
+
+    } catch (error) {
+
+
+        console.error(error);
+
+
+        status.textContent =
+            "Something went wrong while finding matches.";
+
+
+        button.disabled = false;
+
+        button.textContent =
+            "🤖 Find AI Matches";
+
+    }
+
+}
+
+
+// ======================================================
+// DISPLAY MATCHES
+// ======================================================
+
+function displayMatches(matches) {
+
+
+    const container =
+        document.getElementById(
+            "matchesContainer"
+        );
+
+
+    container.innerHTML = "";
+
+
+    matches.forEach(function(person) {
+
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+
+        card.className =
+            "match-card";
+
+
+        const name =
+            person.name ||
+            "Unknown Person";
+
+
+        const firstLetter =
+            name
+                .charAt(0)
+                .toUpperCase();
+
+
+        let skillsHTML = "";
+
+
+        (person.relevant_skills || [])
+            .forEach(function(skill) {
+
+                skillsHTML += `
+                    <span class="skill">
+                        ${skill}
+                    </span>
+                `;
+
+            });
+
+
+        let projectsHTML = "";
+
+
+        (person.relevant_projects || [])
+            .forEach(function(project) {
+
+                projectsHTML += `
+                    <div>
+                        • ${project}
+                    </div>
+                `;
+
+            });
+
+
+        card.innerHTML = `
+
+            <div class="person-header">
+
+                <div class="avatar">
+                    ${firstLetter}
+                </div>
+
+                <div>
+
+                    <h2 class="person-name">
+                        ${name}
+                    </h2>
+
+                    <p class="person-type">
+                        ${person.type || "Contributor"}
+                    </p>
+
+                    <span class="score">
+                        Match Score:
+                        ${person.match_score || "N/A"}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="reason">
+
+                <div class="section-title">
+                    Why this person matches
+                </div>
+
+                ${person.match_reason || ""}
+
+            </div>
+
+
+            <div class="section-title">
+                Relevant Skills
+            </div>
+
+
+            <div class="skills">
+
+                ${skillsHTML}
+
+            </div>
+
+
+            <div class="section-title">
+                Relevant Projects
+            </div>
+
+
+            <div class="projects">
+
+                ${projectsHTML}
+
+            </div>
+
+
+            <div class="contribution">
+
+                <strong>
+                    Potential Contribution
+                </strong>
+
+                <br><br>
+
+                ${person.potential_contribution || ""}
+
+            </div>
+
+        `;
+
+
+        container.appendChild(
+            card
+        );
+
+    });
+
+
+    container.style.display =
+        "block";
+
+
+    window.scrollTo({
+
+        top:
+            container.offsetTop - 30,
+
+        behavior:
+            "smooth"
+
+    });
+
+}
+
+
+// ======================================================
+// GO TO PROPOSALS
+// ======================================================
+
+function goToProposals() {
+
+    window.location.href =
+        "/proposals";
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

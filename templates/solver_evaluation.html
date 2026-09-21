@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SolveNet - AI Evaluation</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        nav {
+            height: 70px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #111827;
+        }
+
+        .back {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 50px auto;
+        }
+
+        .label {
+            color: #6366f1;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 35px;
+            line-height: 1.6;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 28px;
+            margin-bottom: 20px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+        }
+
+        .card h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .problem-title {
+            font-size: 25px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .problem-text {
+            color: #4b5563;
+            line-height: 1.7;
+        }
+
+        .proposal {
+            background: #f8fafc;
+            border-left: 4px solid #6366f1;
+            padding: 18px;
+            border-radius: 8px;
+            line-height: 1.7;
+            color: #374151;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .loading-text {
+            color: #6366f1;
+            font-weight: bold;
+        }
+
+        .evaluation {
+            display: none;
+        }
+
+        .decision {
+            padding: 18px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .pass {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .not-pass {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .score {
+            font-size: 42px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0 30px;
+            color: #4f46e5;
+        }
+
+        .criteria {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .criterion {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .criterion-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .criterion-score {
+            color: #4f46e5;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .feedback {
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .summary {
+            color: #374151;
+            line-height: 1.7;
+        }
+
+        .improvements {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+
+        .improvements li {
+            margin-bottom: 10px;
+            color: #4b5563;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        button {
+            border: none;
+            border-radius: 10px;
+            padding: 14px 24px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .evaluate-btn {
+            background: #4f46e5;
+            color: white;
+            width: 100%;
+        }
+
+        .continue-btn {
+            background: #111827;
+            color: white;
+            padding: 15px 30px;
+        }
+
+        .try-again-btn {
+            background: white;
+            color: #4f46e5;
+            border: 1px solid #c7d2fe;
+            padding: 15px 30px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 700px) {
+            .criteria {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">SolveNet</div>
+
+    <a href="/matched-problems" class="back">
+        ← Back to matched problems
+    </a>
+</nav>
+
+<div class="container">
+
+    <div class="label">AI EVALUATION</div>
+
+    <h1>Evaluate the proposed solution</h1>
+
+    <p class="subtitle">
+        SolveNet's AI evaluates the solution against the selected
+        problem requirements.
+    </p>
+
+    <!-- SELECTED PROBLEM -->
+
+    <div class="card">
+
+        <h2>SELECTED PROBLEM</h2>
+
+        <div class="problem-title">
+            {{ problem.title }}
+        </div>
+
+        <p class="problem-text">
+            {{ problem.problem }}
+        </p>
+
+    </div>
+
+
+    <!-- PROPOSAL -->
+
+    <div class="card">
+
+        <h2>YOUR PROPOSAL</h2>
+
+        <div class="proposal">
+            {{ proposal }}
+        </div>
+
+    </div>
+
+
+    <!-- EVALUATE BUTTON -->
+
+    <div id="evaluateSection">
+
+        <button
+            class="evaluate-btn"
+            onclick="evaluateProposal()"
+        >
+            Evaluate Solution with AI →
+        </button>
+
+    </div>
+
+
+    <!-- LOADING -->
+
+    <div id="loading" class="card loading">
+
+        <div class="loading-text">
+            🤖 AI is evaluating your solution...
+        </div>
+
+        <p style="margin-top:10px;color:#6b7280;">
+            Checking problem alignment, feasibility, impact,
+            innovation and scalability.
+        </p>
+
+    </div>
+
+
+    <!-- EVALUATION RESULT -->
+
+    <div id="evaluationSection" class="evaluation">
+
+        <div class="card">
+
+            <div id="decision" class="decision"></div>
+
+            <div id="overallScore" class="score"></div>
+
+            <div class="criteria">
+
+                <div class="criterion">
+                    <div class="criterion-title">
+                        Problem Alignment
+                    </div>
+
+                    <div
+                        id="problemAlignmentScore"
+                        class="criterion-score"
+                    ></div>
+
+                    <div
+                        id="problemAlignmentFeedback"
+                        class="feedback"
+                    ></div>
+                </div>
+
+
+                <div class="criterion">
+                    <div class="criterion-title">
+                        Technical Feasibility
+                    </div>
+
+                    <div
+                        id="technicalScore"
+                        class="criterion-score"
+                    ></div>
+
+                    <div
+                        id="technicalFeedback"
+                        class="feedback"
+                    ></div>
+                </div>
+
+
+                <div class="criterion">
+                    <div class="criterion-title">
+                        Expected Impact
+                    </div>
+
+                    <div
+                        id="impactScore"
+                        class="criterion-score"
+                    ></div>
+
+                    <div
+                        id="impactFeedback"
+                        class="feedback"
+                    ></div>
+                </div>
+
+
+                <div class="criterion">
+                    <div class="criterion-title">
+                        Innovation
+                    </div>
+
+                    <div
+                        id="innovationScore"
+                        class="criterion-score"
+                    ></div>
+
+                    <div
+                        id="innovationFeedback"
+                        class="feedback"
+                    ></div>
+                </div>
+
+
+                <div class="criterion">
+                    <div class="criterion-title">
+                        Scalability
+                    </div>
+
+                    <div
+                        id="scalabilityScore"
+                        class="criterion-score"
+                    ></div>
+
+                    <div
+                        id="scalabilityFeedback"
+                        class="feedback"
+                    ></div>
+                </div>
+
+
+                <div class="criterion">
+                    <div class="criterion-title">
+                        Resource Requirements
+                    </div>
+
+                    <div
+                        id="resourceScore"
+                        class="criterion-score"
+                    ></div>
+
+                    <div
+                        id="resourceFeedback"
+                        class="feedback"
+                    ></div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUMMARY -->
+
+        <div class="card">
+
+            <h2>AI SUMMARY</h2>
+
+            <p
+                id="summary"
+                class="summary"
+            ></p>
+
+        </div>
+
+
+        <!-- IMPROVEMENTS -->
+
+        <div
+            id="improvementsCard"
+            class="card"
+        >
+
+            <h2>IMPROVEMENTS</h2>
+
+            <ul
+                id="improvements"
+                class="improvements"
+            ></ul>
+
+        </div>
+
+
+        <!-- ACTION BUTTONS -->
+
+        <div class="actions">
+
+            <button
+                id="continueButton"
+                class="continue-btn"
+                onclick="continueToStarterKit()"
+                style="display:none;"
+            >
+                Continue to Starter Kit →
+            </button>
+
+            <button
+                id="tryAgainButton"
+                class="try-again-btn"
+                onclick="window.location.href='/matched-problems'"
+                style="display:none;"
+            >
+                Try Another Problem
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+async function evaluateProposal() {
+
+    document.getElementById("evaluateSection").style.display = "none";
+
+    document.getElementById("loading").style.display = "block";
+
+    try {
+
+        const response = await fetch(
+            "/evaluate-solver-proposal",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        document.getElementById("loading").style.display = "none";
+
+        if (!data.success) {
+
+            alert(
+                data.message ||
+                "Unable to evaluate the solution."
+            );
+
+            document.getElementById("evaluateSection").style.display = "block";
+
+            return;
+        }
+
+        showEvaluation(
+            data.evaluation
+        );
+
+    } catch (error) {
+
+        document.getElementById("loading").style.display = "none";
+
+        document.getElementById("evaluateSection").style.display = "block";
+
+        alert(
+            "Something went wrong while evaluating the solution."
+        );
+
+        console.error(error);
+    }
+}
+
+
+function showEvaluation(result) {
+
+    document.getElementById(
+        "evaluationSection"
+    ).style.display = "block";
+
+
+    const decision =
+        result.decision || "NOT PASS";
+
+    const decisionElement =
+        document.getElementById("decision");
+
+
+    decisionElement.textContent =
+        decision === "PASS"
+            ? "✓ PASS — Solution can move forward"
+            : "✕ NOT PASS — Improve the solution";
+
+
+    decisionElement.className =
+        "decision " +
+        (
+            decision === "PASS"
+                ? "pass"
+                : "not-pass"
+        );
+
+
+    document.getElementById(
+        "overallScore"
+    ).textContent =
+        (result.overall_score || 0) +
+        "/100";
+
+
+    setCriterion(
+        "problemAlignment",
+        result.problem_alignment
+    );
+
+    setCriterion(
+        "technical",
+        result.technical_feasibility
+    );
+
+    setCriterion(
+        "impact",
+        result.expected_impact
+    );
+
+    setCriterion(
+        "innovation",
+        result.innovation
+    );
+
+    setCriterion(
+        "scalability",
+        result.scalability
+    );
+
+    setCriterion(
+        "resource",
+        result.resource_requirements
+    );
+
+
+    document.getElementById(
+        "summary"
+    ).textContent =
+        result.summary ||
+        "No summary provided.";
+
+
+    const improvements =
+        document.getElementById(
+            "improvements"
+        );
+
+    improvements.innerHTML = "";
+
+
+    if (
+        result.improvements &&
+        result.improvements.length > 0
+    ) {
+
+        result.improvements.forEach(
+            function(item) {
+
+                const li =
+                    document.createElement("li");
+
+                li.textContent = item;
+
+                improvements.appendChild(li);
+
+            }
+        );
+
+    } else {
+
+        improvements.innerHTML =
+            "<li>No additional improvements suggested.</li>";
+    }
+
+
+    if (decision === "PASS") {
+
+        document.getElementById(
+            "continueButton"
+        ).style.display = "inline-block";
+
+        document.getElementById(
+            "tryAgainButton"
+        ).style.display = "none";
+
+    } else {
+
+        document.getElementById(
+            "continueButton"
+        ).style.display = "none";
+
+        document.getElementById(
+            "tryAgainButton"
+        ).style.display = "inline-block";
+    }
+
+}
+
+
+function setCriterion(
+    name,
+    data
+) {
+
+    if (!data) {
+        return;
+    }
+
+
+    document.getElementById(
+        name + "Score"
+    ).textContent =
+        (data.score || 0) +
+        "/100";
+
+
+    document.getElementById(
+        name + "Feedback"
+    ).textContent =
+        data.feedback ||
+        "No feedback provided.";
+}
+
+
+/*
+    STAGE 5
+    Continue to Starter Kit
+*/
+
+function continueToStarterKit() {
+
+    console.log(
+        "Moving to Starter Kit..."
+    );
+
+    window.location.href =
+        "/starter-kit";
+}
+
+</script>
+
+</body>
+</html>

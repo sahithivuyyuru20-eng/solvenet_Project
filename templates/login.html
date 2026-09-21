@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SolveNet | Welcome</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f7f6fb,
+                    #eeecf8
+                );
+
+            color: #22223b;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 30px;
+        }
+
+
+        .page {
+
+            width: 100%;
+
+            max-width: 1100px;
+
+            background: white;
+
+            border-radius: 28px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 25px 70px
+                rgba(34, 34, 59, 0.12);
+
+            display: grid;
+
+            grid-template-columns:
+                0.9fr 1.1fr;
+
+            min-height: 650px;
+        }
+
+
+        /* =========================================
+           LEFT SIDE
+        ========================================= */
+
+        .left {
+
+            background: #22223b;
+
+            color: white;
+
+            padding: 55px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+        }
+
+
+        .logo {
+
+            font-size: 30px;
+
+            font-weight: bold;
+
+            letter-spacing: -1px;
+        }
+
+
+        .logo span {
+
+            opacity: 0.6;
+        }
+
+
+        .left-content {
+
+            margin-top: 40px;
+        }
+
+
+        .left h1 {
+
+            font-size: 48px;
+
+            line-height: 1.1;
+
+            margin: 0 0 25px;
+        }
+
+
+        .left h1 span {
+
+            color: #b8b2ff;
+        }
+
+
+        .left p {
+
+            font-size: 17px;
+
+            line-height: 1.8;
+
+            color: #d8d7e5;
+
+            max-width: 430px;
+        }
+
+
+        .steps {
+
+            margin-top: 35px;
+        }
+
+
+        .step {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            margin-bottom: 18px;
+
+            color: #dedde8;
+
+            font-size: 14px;
+        }
+
+
+        .step-number {
+
+            width: 32px;
+
+            height: 32px;
+
+            border-radius: 50%;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.12
+            );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: bold;
+        }
+
+
+        .footer-text {
+
+            font-size: 13px;
+
+            color: #aaa9bd;
+        }
+
+
+        /* =========================================
+           RIGHT SIDE
+        ========================================= */
+
+        .right {
+
+            padding: 55px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+
+        .welcome {
+
+            margin-bottom: 35px;
+        }
+
+
+        .welcome .small-title {
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            color: #77778b;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .welcome h2 {
+
+            font-size: 34px;
+
+            margin: 0 0 12px;
+
+            color: #22223b;
+        }
+
+
+        .welcome p {
+
+            margin: 0;
+
+            color: #77778b;
+
+            line-height: 1.6;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================================
+           OPTION CARDS
+        ========================================= */
+
+        .options {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+
+        .option {
+
+            border: 1px solid #e5e3ef;
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            text-decoration: none;
+
+            color: #22223b;
+
+            background: #fff;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                border-color 0.2s ease;
+
+            cursor: pointer;
+        }
+
+
+        .option:hover {
+
+            transform: translateY(-5px);
+
+            border-color: #b8b2ff;
+
+            box-shadow:
+                0 12px 30px
+                rgba(
+                    34,
+                    34,
+                    59,
+                    0.10
+                );
+        }
+
+
+        .icon {
+
+            width: 55px;
+
+            height: 55px;
+
+            border-radius: 15px;
+
+            background: #f0eefc;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 27px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .option h3 {
+
+            margin: 0 0 10px;
+
+            font-size: 19px;
+        }
+
+
+        .option p {
+
+            margin: 0 0 22px;
+
+            color: #77778b;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        .continue {
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            color: #22223b;
+        }
+
+
+        .continue span {
+
+            margin-left: 5px;
+
+            transition:
+                margin-left 0.2s ease;
+        }
+
+
+        .option:hover
+        .continue span {
+
+            margin-left: 10px;
+        }
+
+
+        .note {
+
+            margin-top: 28px;
+
+            padding: 15px 18px;
+
+            background: #f7f6fb;
+
+            border-radius: 12px;
+
+            color: #77778b;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (
+            max-width: 800px
+        ) {
+
+            .page {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .left {
+
+                padding: 40px;
+
+            }
+
+
+            .left h1 {
+
+                font-size: 38px;
+
+            }
+
+
+            .steps {
+
+                display: none;
+
+            }
+
+
+            .right {
+
+                padding: 40px;
+
+            }
+
+        }
+
+
+        @media (
+            max-width: 550px
+        ) {
+
+            body {
+
+                padding: 15px;
+
+            }
+
+
+            .left,
+            .right {
+
+                padding: 30px;
+
+            }
+
+
+            .options {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .welcome h2 {
+
+                font-size: 28px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =========================================
+         LEFT SIDE
+    ========================================== -->
+
+    <section class="left">
+
+
+        <div>
+
+
+            <div class="logo">
+
+                SolveNet
+
+            </div>
+
+
+            <div class="left-content">
+
+
+                <h1>
+
+                    Problems need
+                    <span>
+                        people.
+                    </span>
+
+                </h1>
+
+
+                <p>
+
+                    SolveNet connects real-world
+                    problems with people who have
+                    the skills, ideas and expertise
+                    to solve them.
+
+                </p>
+
+
+                <div class="steps">
+
+
+                    <div class="step">
+
+                        <div class="step-number">
+                            1
+                        </div>
+
+                        <div>
+                            Identify a real problem
+                        </div>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-number">
+                            2
+                        </div>
+
+                        <div>
+                            Connect with relevant expertise
+                        </div>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-number">
+                            3
+                        </div>
+
+                        <div>
+                            Turn ideas into solutions
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-text">
+
+            AI-powered problem solving platform
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =========================================
+         RIGHT SIDE
+    ========================================== -->
+
+    <section class="right">
+
+
+        <div class="welcome">
+
+
+            <div class="small-title">
+
+                Welcome to SolveNet
+
+            </div>
+
+
+            <h2>
+
+                What would you like to do?
+
+            </h2>
+
+
+            <p>
+
+                Choose how you want to participate
+                in the SolveNet community.
+
+            </p>
+
+
+        </div>
+
+
+        <div class="options">
+
+
+            <!-- RAISE A PROBLEM -->
+
+            <a
+                href="/intake"
+                class="option"
+            >
+
+                <div class="icon">
+
+                    📝
+
+                </div>
+
+
+                <h3>
+
+                    Raise a Problem
+
+                </h3>
+
+
+                <p>
+
+                    Have a real-world problem that
+                    needs to be understood and solved?
+
+                </p>
+
+
+                <div class="continue">
+
+                    Raise a Problem
+
+                    <span>
+                        →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- SOLVE A PROBLEM -->
+
+            <a
+                href="/solve"
+                class="option"
+            >
+
+                <div class="icon">
+
+                    💡
+
+                </div>
+
+
+                <h3>
+
+                    Solve a Problem
+
+                </h3>
+
+
+                <p>
+
+                    Have skills, knowledge or ideas
+                    that can help solve real problems?
+
+                </p>
+
+
+                <div class="continue">
+
+                    Find Problems
+
+                    <span>
+                        →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+        </div>
+
+
+        <div class="note">
+
+            💡 You can participate as a problem
+            raiser or as a solution contributor.
+
+        </div>
+
+
+    </section>
+
+
+</div>
+
+
+</body>
+
+</html>

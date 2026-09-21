@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SolveNet | Starter Kit</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f6fb;
+            color: #22223b;
+        }
+
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+
+        header {
+            background: white;
+            border-bottom: 1px solid #e5e3ef;
+            padding: 30px 0;
+        }
+
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+
+        .stage {
+            font-size: 13px;
+            color: #77778b;
+            margin-top: 6px;
+            letter-spacing: 1px;
+        }
+
+
+        main {
+            padding: 50px 0 80px;
+        }
+
+
+        h1 {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+
+        .subtitle {
+            color: #77778b;
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+
+        .problem-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid #e5e3ef;
+            margin-bottom: 25px;
+        }
+
+
+        .problem-card h3 {
+            margin-top: 0;
+        }
+
+
+        .problem-text {
+            color: #55556a;
+            line-height: 1.7;
+        }
+
+
+        button {
+            border: none;
+            border-radius: 10px;
+            padding: 14px 22px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+
+        .primary {
+            background: #22223b;
+            color: white;
+        }
+
+
+        .primary:hover {
+            opacity: 0.9;
+        }
+
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+
+        .loading {
+            display: none;
+            margin: 25px 0;
+            color: #77778b;
+        }
+
+
+        #kit {
+            margin-top: 35px;
+        }
+
+
+        .section {
+            background: white;
+            border: 1px solid #e5e3ef;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 22px;
+        }
+
+
+        .section h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+
+        .section p {
+            color: #55556a;
+            line-height: 1.7;
+        }
+
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+
+        .tag {
+            background: #f0eff7;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+
+        .architecture-item {
+            padding: 15px;
+            background: #f8f7fb;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+
+        .architecture-item strong {
+            display: block;
+            margin-bottom: 6px;
+        }
+
+
+        ol,
+        ul {
+            color: #55556a;
+            line-height: 1.8;
+        }
+
+
+        pre {
+            background: #181825;
+            color: #f5f5f5;
+            padding: 20px;
+            border-radius: 12px;
+            overflow-x: auto;
+            line-height: 1.5;
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           STAGE 4 SAVE SECTION
+           ===================================================== */
+
+        .save-section {
+
+            display: none;
+
+            background: white;
+
+            border: 1px solid #e5e3ef;
+
+            border-radius: 18px;
+
+            padding: 40px;
+
+            margin-top: 45px;
+
+            text-align: center;
+        }
+
+
+        .save-section h2 {
+
+            margin-top: 0;
+
+            font-size: 26px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .save-section p {
+
+            color: #77778b;
+
+            line-height: 1.6;
+
+            margin-bottom: 25px;
+        }
+
+
+        .title-input {
+
+            width: 100%;
+
+            max-width: 650px;
+
+            padding: 14px 16px;
+
+            border: 1px solid #d9d7e5;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            margin-bottom: 15px;
+        }
+
+
+        .title-input:focus {
+
+            border-color: #22223b;
+        }
+
+
+        .save-message {
+
+            margin-top: 18px;
+
+            font-weight: bold;
+        }
+
+
+        .marketplace-button {
+
+            display: none;
+
+            margin-top: 20px;
+
+            background: white;
+
+            color: #22223b;
+
+            border: 1px solid #22223b;
+        }
+
+
+        .error {
+
+            color: #b42318;
+
+            background: #fff1f0;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            margin-top: 20px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+
+<header>
+
+    <div class="container">
+
+        <div class="logo">
+            SolveNet
+        </div>
+
+        <div class="stage">
+            STAGE 03 · AI SOLUTION STARTER KIT
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- ============================================================
+     MAIN
+     ============================================================ -->
+
+<main>
+
+<div class="container">
+
+
+    <h1>
+        From problem to first prototype.
+    </h1>
+
+
+    <p class="subtitle">
+
+        SolveNet combines your structured problem
+        and matched expertise to create a practical
+        project starter kit.
+
+    </p>
+
+
+
+    <!-- ========================================================
+         PROBLEM
+         ======================================================== -->
+
+    <div class="problem-card">
+
+        <h3>
+            Your Problem
+        </h3>
+
+
+        <p class="problem-text">
+
+            {{ problem.problem }}
+
+        </p>
+
+    </div>
+
+
+
+    <!-- ========================================================
+         GENERATE BUTTON
+         ======================================================== -->
+
+    <button
+        class="primary"
+        onclick="generateStarterKit()"
+        id="generateButton"
+    >
+
+        🚀 Generate AI Starter Kit
+
+    </button>
+
+
+
+    <!-- ========================================================
+         LOADING
+         ======================================================== -->
+
+    <div
+        class="loading"
+        id="loading"
+    >
+
+        🧠 AI is building your starter kit...
+
+    </div>
+
+
+
+    <!-- ========================================================
+         GENERATED STARTER KIT
+         ======================================================== -->
+
+    <div id="kit">
+
+
+        <!-- 1. PROBLEM SUMMARY -->
+
+        <div
+            class="section"
+            id="summarySection"
+            style="display:none;"
+        >
+
+            <h2>
+                1. Problem Summary
+            </h2>
+
+            <p id="problemSummary"></p>
+
+        </div>
+
+
+
+        <!-- 2. SOLUTION -->
+
+        <div
+            class="section"
+            id="solutionSection"
+            style="display:none;"
+        >
+
+            <h2>
+                2. Proposed Solution Direction
+            </h2>
+
+            <p id="solutionDirection"></p>
+
+        </div>
+
+
+
+        <!-- 3. LITERATURE -->
+
+        <div
+            class="section"
+            id="literatureSection"
+            style="display:none;"
+        >
+
+            <h2>
+                3. Literature Review
+            </h2>
+
+            <div id="literature"></div>
+
+        </div>
+
+
+
+        <!-- 4. CASE STUDIES -->
+
+        <div
+            class="section"
+            id="caseStudySection"
+            style="display:none;"
+        >
+
+            <h2>
+                4. Similar Case Studies
+            </h2>
+
+            <div id="caseStudies"></div>
+
+        </div>
+
+
+
+        <!-- 5. TECHNOLOGY -->
+
+        <div
+            class="section"
+            id="technologySection"
+            style="display:none;"
+        >
+
+            <h2>
+                5. Suggested Technology Stack
+            </h2>
+
+            <div id="technology"></div>
+
+        </div>
+
+
+
+        <!-- 6. ARCHITECTURE -->
+
+        <div
+            class="section"
+            id="architectureSection"
+            style="display:none;"
+        >
+
+            <h2>
+                6. System Architecture
+            </h2>
+
+            <div id="architecture"></div>
+
+        </div>
+
+
+
+        <!-- 7. ROADMAP -->
+
+        <div
+            class="section"
+            id="roadmapSection"
+            style="display:none;"
+        >
+
+            <h2>
+                7. Implementation Roadmap
+            </h2>
+
+            <div id="roadmap"></div>
+
+        </div>
+
+
+
+        <!-- 8. STARTER CODE -->
+
+        <div
+            class="section"
+            id="codeSection"
+            style="display:none;"
+        >
+
+            <h2>
+                8. Starter Code
+            </h2>
+
+            <p id="codeFilename"></p>
+
+            <pre><code id="starterCode"></code></pre>
+
+        </div>
+
+
+
+        <!-- 9. SUCCESS METRICS -->
+
+        <div
+            class="section"
+            id="metricsSection"
+            style="display:none;"
+        >
+
+            <h2>
+                9. Success Metrics
+            </h2>
+
+            <ul id="metrics"></ul>
+
+        </div>
+
+
+
+        <!-- 10. RISKS -->
+
+        <div
+            class="section"
+            id="risksSection"
+            style="display:none;"
+        >
+
+            <h2>
+                10. Risks & Challenges
+            </h2>
+
+            <ul id="risks"></ul>
+
+        </div>
+
+
+
+        <!-- 11. TEAM -->
+
+        <div
+            class="section"
+            id="teamSection"
+            style="display:none;"
+        >
+
+            <h2>
+                11. Recommended Team Roles
+            </h2>
+
+            <div id="teamRoles"></div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ========================================================
+         STAGE 4 — SAVE SOLUTION
+         ======================================================== -->
+
+    <div
+        class="save-section"
+        id="saveSection"
+    >
+
+        <h2>
+            🚀 Make This Solution Reusable
+        </h2>
+
+
+        <p>
+
+            Save this generated solution to the
+            SolveNet Solution Marketplace.
+
+            You can explore it later and use it
+            as a reference for future projects.
+
+        </p>
+
+
+        <input
+            type="text"
+            id="solutionTitle"
+            class="title-input"
+            value="{{ problem.get('title', 'SolveNet Solution') }}"
+            placeholder="Enter solution title"
+        >
+
+
+        <br>
+
+
+        <button
+            class="primary"
+            onclick="saveSolution()"
+            id="saveSolutionButton"
+        >
+
+            💾 Save Solution to SolveNet
+
+        </button>
+
+
+        <div
+            id="saveMessage"
+            class="save-message"
+        ></div>
+
+
+        <button
+            id="marketplaceButton"
+            class="marketplace-button"
+            onclick="goToMarketplace()"
+        >
+
+            🌐 Explore Solution Marketplace →
+
+        </button>
+
+    </div>
+
+
+</div>
+
+</main>
+
+
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+
+<script>
+
+
+// ============================================================
+// GENERATE STARTER KIT
+// ============================================================
+
+async function generateStarterKit() {
+
+
+    const button =
+        document.getElementById(
+            "generateButton"
+        );
+
+
+    const loading =
+        document.getElementById(
+            "loading"
+        );
+
+
+    button.disabled = true;
+
+
+    button.innerText =
+        "Generating...";
+
+
+    loading.style.display =
+        "block";
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                "/generate-starter-kit",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    }
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        loading.style.display =
+            "none";
+
+
+        if (!data.success) {
+
+
+            alert(
+                data.message
+            );
+
+
+            button.disabled =
+                false;
+
+
+            button.innerText =
+                "🚀 Generate AI Starter Kit";
+
+
+            return;
+
+        }
+
+
+        displayStarterKit(
+            data.starter_kit
+        );
+
+
+        button.innerText =
+            "✓ Starter Kit Generated";
+
+
+    }
+
+
+    catch (error) {
+
+
+        loading.style.display =
+            "none";
+
+
+        alert(
+            "Something went wrong: "
+            + error
+        );
+
+
+        button.disabled =
+            false;
+
+
+        button.innerText =
+            "🚀 Generate AI Starter Kit";
+
+    }
+
+}
+
+
+
+// ============================================================
+// DISPLAY STARTER KIT
+// ============================================================
+
+function displayStarterKit(kit) {
+
+
+    // --------------------------------------------------------
+    // Problem Summary
+    // --------------------------------------------------------
+
+    document.getElementById(
+        "problemSummary"
+    ).innerText =
+        kit.problem_summary || "";
+
+
+    document.getElementById(
+        "summarySection"
+    ).style.display =
+        "block";
+
+
+
+    // --------------------------------------------------------
+    // Solution Direction
+    // --------------------------------------------------------
+
+    document.getElementById(
+        "solutionDirection"
+    ).innerText =
+        kit.solution_direction || "";
+
+
+    document.getElementById(
+        "solutionSection"
+    ).style.display =
+        "block";
+
+
+
+    // --------------------------------------------------------
+    // Literature Review
+    // --------------------------------------------------------
+
+    fillLiterature(
+        kit.literature_review || []
+    );
+
+
+
+    // --------------------------------------------------------
+    // Case Studies
+    // --------------------------------------------------------
+
+    fillCaseStudies(
+        kit.case_studies || []
+    );
+
+
+
+    // --------------------------------------------------------
+    // Technology
+    // --------------------------------------------------------
+
+    fillTechnology(
+        kit.technology_stack || {}
+    );
+
+
+
+    // --------------------------------------------------------
+    // Architecture
+    // --------------------------------------------------------
+
+    fillArchitecture(
+        kit.architecture || []
+    );
+
+
+
+    // --------------------------------------------------------
+    // Roadmap
+    // --------------------------------------------------------
+
+    fillRoadmap(
+        kit.implementation_roadmap || []
+    );
+
+
+
+    // --------------------------------------------------------
+    // Starter Code
+    // --------------------------------------------------------
+
+    if (kit.starter_code) {
+
+
+        document.getElementById(
+            "codeFilename"
+        ).innerText =
+            "File: "
+            +
+            (
+                kit.starter_code.filename
+                ||
+                "starter_code"
+            );
+
+
+        document.getElementById(
+            "starterCode"
+        ).textContent =
+            kit.starter_code.code
+            ||
+            "";
+
+
+        document.getElementById(
+            "codeSection"
+        ).style.display =
+            "block";
+
+    }
+
+
+
+    // --------------------------------------------------------
+    // Success Metrics
+    // --------------------------------------------------------
+
+    fillList(
+        "metrics",
+        kit.success_metrics || []
+    );
+
+
+    document.getElementById(
+        "metricsSection"
+    ).style.display =
+        "block";
+
+
+
+    // --------------------------------------------------------
+    // Risks
+    // --------------------------------------------------------
+
+    fillList(
+        "risks",
+        kit.risks || []
+    );
+
+
+    document.getElementById(
+        "risksSection"
+    ).style.display =
+        "block";
+
+
+
+    // --------------------------------------------------------
+    // Team Roles
+    // --------------------------------------------------------
+
+    fillTeamRoles(
+        kit.team_roles || []
+    );
+
+
+
+    // --------------------------------------------------------
+    // SHOW STAGE 4
+    // --------------------------------------------------------
+
+    document.getElementById(
+        "saveSection"
+    ).style.display =
+        "block";
+
+
+    // Scroll to the beginning of generated content
+
+    document.getElementById(
+        "summarySection"
+    ).scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+
+
+// ============================================================
+// LITERATURE REVIEW
+// ============================================================
+
+function fillLiterature(items) {
+
+
+    const container =
+        document.getElementById(
+            "literature"
+        );
+
+
+    container.innerHTML = "";
+
+
+    items.forEach(
+        function(item) {
+
+
+            container.innerHTML += `
+
+                <div class="architecture-item">
+
+                    <strong>
+                        ${item.topic || ""}
+                    </strong>
+
+                    <span>
+                        ${item.why_relevant || ""}
+                    </span>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    document.getElementById(
+        "literatureSection"
+    ).style.display =
+        "block";
+
+}
+
+
+
+// ============================================================
+// CASE STUDIES
+// ============================================================
+
+function fillCaseStudies(items) {
+
+
+    const container =
+        document.getElementById(
+            "caseStudies"
+        );
+
+
+    container.innerHTML = "";
+
+
+    items.forEach(
+        function(item) {
+
+
+            container.innerHTML += `
+
+                <div class="architecture-item">
+
+                    <strong>
+                        ${item.title || ""}
+                    </strong>
+
+                    <span>
+                        ${item.description || ""}
+                    </span>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    document.getElementById(
+        "caseStudySection"
+    ).style.display =
+        "block";
+
+}
+
+
+
+// ============================================================
+// TECHNOLOGY STACK
+// ============================================================
+
+function fillTechnology(stack) {
+
+
+    const container =
+        document.getElementById(
+            "technology"
+        );
+
+
+    container.innerHTML = "";
+
+
+    Object.entries(stack).forEach(
+        function([category, values]) {
+
+
+            if (
+                !Array.isArray(values)
+            ) {
+
+                return;
+
+            }
+
+
+            container.innerHTML += `
+
+                <div class="architecture-item">
+
+                    <strong>
+                        ${formatCategory(category)}
+                    </strong>
+
+                    <div class="tags">
+
+                        ${
+                            values
+                            .map(
+                                value =>
+                                `
+                                <span class="tag">
+                                    ${value}
+                                </span>
+                                `
+                            )
+                            .join("")
+                        }
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    document.getElementById(
+        "technologySection"
+    ).style.display =
+        "block";
+
+}
+
+
+
+// ============================================================
+// FORMAT CATEGORY
+// ============================================================
+
+function formatCategory(text) {
+
+
+    return text
+        .replaceAll(
+            "_",
+            " "
+        )
+        .replace(
+            /\b\w/g,
+            function(letter) {
+
+                return letter.toUpperCase();
+
+            }
+        );
+
+}
+
+
+
+// ============================================================
+// ARCHITECTURE
+// ============================================================
+
+function fillArchitecture(items) {
+
+
+    const container =
+        document.getElementById(
+            "architecture"
+        );
+
+
+    container.innerHTML = "";
+
+
+    items.forEach(
+        function(item) {
+
+
+            container.innerHTML += `
+
+                <div class="architecture-item">
+
+                    <strong>
+                        ${item.component || ""}
+                    </strong>
+
+                    <span>
+                        ${item.description || ""}
+                    </span>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    document.getElementById(
+        "architectureSection"
+    ).style.display =
+        "block";
+
+}
+
+
+
+// ============================================================
+// ROADMAP
+// ============================================================
+
+function fillRoadmap(items) {
+
+
+    const container =
+        document.getElementById(
+            "roadmap"
+        );
+
+
+    container.innerHTML = "";
+
+
+    const list =
+        document.createElement(
+            "ol"
+        );
+
+
+    items.forEach(
+        function(item) {
+
+
+            const li =
+                document.createElement(
+                    "li"
+                );
+
+
+            li.innerText =
+                item;
+
+
+            list.appendChild(
+                li
+            );
+
+        }
+    );
+
+
+    container.appendChild(
+        list
+    );
+
+
+    document.getElementById(
+        "roadmapSection"
+    ).style.display =
+        "block";
+
+}
+
+
+
+// ============================================================
+// GENERIC LIST
+// ============================================================
+
+function fillList(
+    elementId,
+    items
+) {
+
+
+    const container =
+        document.getElementById(
+            elementId
+        );
+
+
+    container.innerHTML = "";
+
+
+    items.forEach(
+        function(item) {
+
+
+            const li =
+                document.createElement(
+                    "li"
+                );
+
+
+            li.innerText =
+                item;
+
+
+            container.appendChild(
+                li
+            );
+
+        }
+    );
+
+}
+
+
+
+// ============================================================
+// TEAM ROLES
+// ============================================================
+
+function fillTeamRoles(items) {
+
+
+    const container =
+        document.getElementById(
+            "teamRoles"
+        );
+
+
+    container.innerHTML = "";
+
+
+    items.forEach(
+        function(item) {
+
+
+            container.innerHTML += `
+
+                <div class="architecture-item">
+
+                    <strong>
+                        ${item.role || ""}
+                    </strong>
+
+                    <div>
+
+                        Suggested match:
+                        ${item.suggested_match || ""}
+
+                    </div>
+
+                    <div>
+
+                        ${item.responsibility || ""}
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    document.getElementById(
+        "teamSection"
+    ).style.display =
+        "block";
+
+}
+
+
+
+// ============================================================
+// SAVE SOLUTION
+// ============================================================
+
+async function saveSolution() {
+
+
+    const titleInput =
+        document.getElementById(
+            "solutionTitle"
+        );
+
+
+    const saveButton =
+        document.getElementById(
+            "saveSolutionButton"
+        );
+
+
+    const message =
+        document.getElementById(
+            "saveMessage"
+        );
+
+
+    const title =
+        titleInput.value.trim();
+
+
+    if (!title) {
+
+
+        message.innerText =
+            "Please enter a solution title.";
+
+
+        return;
+
+    }
+
+
+    saveButton.disabled =
+        true;
+
+
+    saveButton.innerText =
+        "Saving...";
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                "/save-solution",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        title: title
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+
+            message.innerText =
+                "❌ "
+                +
+                data.message;
+
+
+            saveButton.disabled =
+                false;
+
+
+            saveButton.innerText =
+                "💾 Save Solution to SolveNet";
+
+
+            return;
+
+        }
+
+
+        message.innerText =
+            "✅ Solution saved successfully!";
+
+
+        saveButton.innerText =
+            "✓ Solution Saved";
+
+
+        document.getElementById(
+            "marketplaceButton"
+        ).style.display =
+            "inline-block";
+
+    }
+
+
+    catch (error) {
+
+
+        message.innerText =
+            "❌ Something went wrong: "
+            +
+            error;
+
+
+        saveButton.disabled =
+            false;
+
+
+        saveButton.innerText =
+            "💾 Save Solution to SolveNet";
+
+    }
+
+}
+
+
+
+// ============================================================
+// GO TO MARKETPLACE
+// ============================================================
+
+function goToMarketplace() {
+
+
+    window.location.href =
+        "/marketplace";
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

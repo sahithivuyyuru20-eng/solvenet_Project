@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SolveNet | AI Co-Pilot for Problem Solving</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+
+        <div class="logo">
+            <span class="logo-icon">✦</span>
+            SolveNet
+        </div>
+
+        <div class="nav-links">
+            <a href="#how-it-works">How It Works</a>
+            <a href="#solutions">Solutions</a>
+            <a href="#about">About</a>
+        </div>
+
+        <button class="nav-button" onclick="startSolving()">
+            Start Solving
+        </button>
+
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                ✨ AI-Powered Problem Solving
+            </div>
+
+            <h1>
+                Turn Real-World Problems
+                <span>Into Solvable Projects.</span>
+            </h1>
+
+            <p>
+                SolveNet uses AI to transform messy real-world problems
+                into structured projects, find the right people to solve them,
+                and give teams a head start.
+            </p>
+
+            <div class="hero-buttons">
+
+                <button class="primary-button" onclick="startSolving()">
+                    🚀 Start Solving
+                </button>
+
+                <button class="secondary-button" onclick="scrollToSection()">
+                    See How It Works ↓
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="hero-card">
+
+            <div class="card-header">
+                <span class="status-dot"></span>
+                AI Problem Analysis
+            </div>
+
+            <div class="problem-box">
+                <small>REAL-WORLD PROBLEM</small>
+
+                <p>
+                    "Our college canteen wastes too much food
+                    every day."
+                </p>
+            </div>
+
+            <div class="arrow">↓</div>
+
+            <div class="ai-result">
+
+                <div class="result-title">
+                    ✦ AI Structured Problem
+                </div>
+
+                <div class="result-item">
+                    <span>Domain</span>
+                    <strong>Sustainability + AI</strong>
+                </div>
+
+                <div class="result-item">
+                    <span>Goal</span>
+                    <strong>Predict food demand</strong>
+                </div>
+
+                <div class="result-item">
+                    <span>Data</span>
+                    <strong>Meals + Attendance</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- How It Works -->
+    <section class="how-section" id="how-it-works">
+
+        <div class="section-heading">
+
+            <div class="badge">
+                THE SOLVENET PIPELINE
+            </div>
+
+            <h2>
+                From Problem to Solution
+            </h2>
+
+            <p>
+                Four AI-powered stages turn an unclear problem
+                into a reusable solution.
+            </p>
+
+        </div>
+
+
+        <div class="steps">
+
+            <div class="step-card">
+
+                <div class="step-number">01</div>
+
+                <div class="step-icon">🧠</div>
+
+                <h3>Smart Intake</h3>
+
+                <p>
+                    AI turns a vague problem into a structured,
+                    actionable project brief.
+                </p>
+
+            </div>
+
+
+            <div class="step-card">
+
+                <div class="step-number">02</div>
+
+                <div class="step-icon">🔗</div>
+
+                <h3>AI Matchmaking</h3>
+
+                <p>
+                    Find students, researchers and teams whose
+                    skills match the problem.
+                </p>
+
+            </div>
+
+
+            <div class="step-card">
+
+                <div class="step-number">03</div>
+
+                <div class="step-icon">⚡</div>
+
+                <h3>Starter Kit</h3>
+
+                <p>
+                    Get research, case studies, technology
+                    recommendations and starter code.
+                </p>
+
+            </div>
+
+
+            <div class="step-card">
+
+                <div class="step-number">04</div>
+
+                <div class="step-icon">🌐</div>
+
+                <h3>Solution Marketplace</h3>
+
+                <p>
+                    Store successful solutions so others can
+                    reuse and adapt them.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Solutions -->
+    <section class="solutions-section" id="solutions">
+
+        <div class="section-heading">
+
+            <div class="badge">
+                WHY SOLVENET?
+            </div>
+
+            <h2>
+                Don't Start From Zero.
+            </h2>
+
+            <p>
+                SolveNet connects problems, people and knowledge
+                into one intelligent ecosystem.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+                <span>01</span>
+                <h3>Understand</h3>
+                <p>
+                    AI asks the right questions and turns vague
+                    problems into clear project briefs.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <span>02</span>
+                <h3>Connect</h3>
+                <p>
+                    Semantic matching finds people based on
+                    skills, experience and project history.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <span>03</span>
+                <h3>Accelerate</h3>
+                <p>
+                    Teams receive an AI-generated starter kit
+                    instead of beginning with a blank page.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <span>04</span>
+                <h3>Reuse</h3>
+                <p>
+                    Completed solutions become resources for
+                    solving similar problems in the future.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Bottom CTA -->
+    <section class="cta-section" id="about">
+
+        <h2>
+            Have a Problem Worth Solving?
+        </h2>
+
+        <p>
+            Let AI turn it into a project your team can actually build.
+        </p>
+
+        <button class="primary-button" onclick="startSolving()">
+            🚀 Start With Your Problem
+        </button>
+
+    </section>
+
+
+    <footer>
+
+        <div class="logo">
+            <span class="logo-icon">✦</span>
+            SolveNet
+        </div>
+
+        <p>
+            AI Co-Pilot for Civic & Real-World Problem Solving
+        </p>
+
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
